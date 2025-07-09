@@ -15,11 +15,12 @@ export default {
           pink: '#CE2C84',
           orange: '#EE7002',
           brown: '#402806',
-          black: '#000000',
+          black: '#282828',
           white: '#FBFBFB',
           red: '#D63E3E',
           blue: '#3E85D6',
           green: '#26B98A',
+          rose: '#F69480',
           yellow: '#F9AD21'
         },
         secondary: {
@@ -37,6 +38,7 @@ export default {
           brown: '#FEF4EB',
         },
         stroke: {
+          300: '#C3C3C3',
           200: '#DFDFDF',
           100: '#F1F1F1',
         },
