@@ -13,7 +13,7 @@ import Feedback from "../../components/Feedback";
 import SubScore from "../../components/SubScore";
 import TableComp from "../../components/Table";
 import FinanceDetail from "../../components/FinanceDetail";
-
+import { useNavigate } from "react-router-dom";
 
 function createData(competitor, description, link) {
   return { competitor, description, link };
@@ -22,6 +22,7 @@ function createData(competitor, description, link) {
 
 function FeasibilityPage() {
   const [activeTab, setActiveTab] = useState("overview");
+  const navigate = useNavigate();
   const results = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit. ",
     "Morbi facilisis ipsum in dapibus luctus. Nullam urna tellus, porttitor in justo vitae, ornare fermentum quam. Aliquam erat volutpat. Ut consectetur mollis nulla nec consectetur.",
@@ -145,7 +146,7 @@ function FeasibilityPage() {
 
             <div className="border-t-stroke-200 border-t-[2px] p-4 mx-2 font-istok flex justify-end">
               <button className="bg-stroke-100 border-t-stroke-200 border-[2px] py-1 px-3 mr-2 rounded-xl shadow-s">Retry Analysis <FontAwesomeIcon icon={faRotateRight} className="text-primary-pink"></FontAwesomeIcon></button>
-              <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg">Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
+              <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={() => navigate('/home')}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
             </div>
 
 
