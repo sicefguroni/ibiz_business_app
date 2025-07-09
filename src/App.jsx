@@ -5,6 +5,9 @@ import GuidesPage from './pages/GuidesPage';
 import TrainingsPage from './pages/TrainingsPage';
 import LoansPage from './pages/LoansPage';
 import CommunityPage from './pages/CommunityPage';
+import FeasibilityPage from './pages/feasibility_page/page';
+
+
 
 function App() {
   return (
@@ -16,6 +19,7 @@ function App() {
         <Route path="/trainings" element={<TrainingsPage />} />
         <Route path="/loans" element={<LoansPage />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/feasibility" element={<FeasibilityPage />}></Route>
       </Routes>
     </Router>
   );
