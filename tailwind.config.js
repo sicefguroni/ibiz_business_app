@@ -6,16 +6,21 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inria: ['Inria Sans', 'sans-serif'],
+        istok: ['Istok Web', 'sans-serif']
+      },
       colors: {
         primary: {
           pink: '#CE2C84',
           orange: '#EE7002',
           brown: '#402806',
-          black: '#3BF4F4',
+          black: '#000000',
           white: '#FBFBFB',
           red: '#D63E3E',
           blue: '#3E85D6',
-          green: '#26B98A'
+          green: '#26B98A',
+          yellow: '#F9AD21'
         },
         secondary: {
           pink: '#EFBBD7',
@@ -25,6 +30,7 @@ export default {
           red: '#FFCECF',
           blue: '#CEE3FF',
           green: '#E7F8F2',
+          yellow: '#FFF7E9'
         },
         tint: {
           pink: '#FFCEF3',
@@ -33,10 +39,14 @@ export default {
         stroke: {
           200: '#DFDFDF',
           100: '#F1F1F1',
+        },
+        overlay: {
+          green: '#61D1AE',
+          pink: '#FCF1F7'
         }
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }
 
