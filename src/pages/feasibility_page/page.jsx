@@ -41,7 +41,7 @@ function FeasibilityPage() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[100vh] w-full">
+      <div className="flex justify-center items-center h-full w-full">
         <div className="flex flex-col bg-stroke-100 h-[47rem] w-[25rem] md:w-[40rem] rounded-3xl shadow-lg">
           <div className=" flex items-center bg-primary-pink w-full h-[85px] rounded-t-3xl px-8">
             <div className="bg-secondary-pink w-[2.5rem] h-[2.5rem] rounded-lg"></div>

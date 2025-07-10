@@ -1,10 +1,55 @@
-import DownloadIcon from '../assets/page-cards/download-icon.svg?react';
+import { DownloadIcon } from 'lucide-react';
 import AddIcon from '../assets/page-cards/add-icon.svg?react';
 import { useState } from 'react';
 
-export const BusinessCard = ({ image, title, location }) => {
+export const BusinessCard = ({ image, title, location, description, feasibilityReport,  PDF }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedTab, setSelectedTab] = useState('feasibility');
+
+    const BusinessModal = () => {
+        return (
+            <div onClick={() => setIsOpen(false)} class='h-full w-screen flex items-center justify-center bg-black/50 fixed inset-0 z-50'>
+                <div onClick={(e) => e.stopPropagation()} className='flex bg-primary-white rounded-xl w-[900px] h-[600px] shadow-xl p-4 overflow-hidden'>
+                    <div className='flex flex-col justify-between w-2/5 h-full '>
+                        <div className='mr-8'>
+                            <h1 className='text-primary-black font-[Istok Web] text-[18px] font-medium mb-4'>Business Details</h1>
+                            <div className='flex flex-col items-center'>
+                                <img src={image} alt="Business Logo" className='w-[80px] h-[80px] rounded-full' />
+                                <h1 className='text-primary-black font-[Istok Web] text-[18px] '>{title}</h1>
+                                <p className='text-primary-black font-[Istok Web] text-[14px]'>📍{location}</p>
+                            </div>
+                            <p className='text-primary-black font-[Istok Web] text-[14px] mt-4 border-t border-stroke-200 py-4'>{description}</p>
+                        </div>
+                        <div className='flex gap-2'>
+                            <button onClick={() => setIsOpen(false)} className='bg-primary-white hover:bg-stroke-200/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md px-4 py-2 border border-primary-black/50 flex-shrink-0'>
+                                Close
+                            </button>
+                            <button onClick={() => setIsOpen(false)} className='flex items-center gap-2 bg-secondary-brown hover:bg-secondary-brown/70 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md border border-primary-black/50 px-8 py-2 flex-shrink-0'>
+                                Download PDF<DownloadIcon className='w-4 h-4' />
+                            </button>
+                        </div>
+                    </div>
+                    <div className='flex flex-col w-3/5 h-full'>
+                        <div className='flex justify-evenly mb-2 gap-1 border-b border-stroke-200'>
+                            <button onClick={() => setSelectedTab('feasibility')} className={`py-2 hover:bg-secondary-brown/70 w-full transition-all duration-300 text-primary-black font-[Istok Web] text-[14px] rounded-t-md ${selectedTab === 'feasibility' ? 'bg-secondary-brown/70 font-medium' : ''}`}>
+                                Feasibility Report
+                            </button>
+                            <button onClick={() => setSelectedTab('businessPlan')} className={`py-2 hover:bg-secondary-brown/70  w-full transition-all duration-300 text-primary-black font-[Istok Web] text-[14px] rounded-t-md ${selectedTab === 'businessPlan' ? 'bg-secondary-brown/70 font-medium' : ''}`}>
+                                Business Plan
+                            </button>
+                        </div>
+                        <div className='flex-1'>
+                            {selectedTab === 'feasibility' ? feasibilityReport : <iframe src={PDF} className='w-full h-full' />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="flex flex-col justify-between h-fit bg-primary-white rounded-xl hover:shadow-md transition-all duration-300 ease-in-out shadow-black/20 border border-stroke-200 overflow-hidden">
+            {isOpen && <BusinessModal />}
             <div className="flex items-center justify-center py-4 overflow-hidden">
                 <img src={image} alt="Restaurant Logo" className="max-w-full max-h-full object-contain" />
             </div>
@@ -12,8 +57,8 @@ export const BusinessCard = ({ image, title, location }) => {
                 <div className="overflow-hidden">
                     <h1 className="text-primary-brown font-[Istok Web] font-medium overflow-hidden text-ellipsis whitespace-nowrap">{title}</h1>
                     <p className="text-primary-black/80 font-[Istok Web] text-[12px] overflow-hidden text-ellipsis whitespace-nowrap">📍{location}</p>
-                </div>
-                <button className="bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[12px] rounded-md px-4 py-2 border border-primary-black/50 flex-shrink-0">
+                </div>  
+                <button onClick={() => setIsOpen(!isOpen)} className="bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[12px] rounded-md px-4 py-2 border border-primary-black/50 flex-shrink-0">
                     Open
                 </button>
             </div>
