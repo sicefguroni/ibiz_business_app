@@ -9,7 +9,7 @@ const HomePage = () => {
     return (
         <div className="normal-bg min-h-screen">
             <Navbar />
-            <div className="flex justify-between h-full px-16 pt-24">
+            <div className="flex justify-between h-full px-16 pt-20">
                 <UserProfile />
                 <PageBody title="Your Business Plans" home={true} grid={true}>
                     <BusinessCard image={RestaurantLogo} title="Restaurant" location="123 Main St, Anytown, USA" />

@@ -45,6 +45,10 @@ export default {
         overlay: {
           green: '#61D1AE',
           pink: '#FCF1F7'
+        },
+        background: {
+          landing: '#FEF4EB',
+          normal: '#FEF4EB',
         }
       },
     },

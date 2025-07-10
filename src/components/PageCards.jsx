@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export const BusinessCard = ({ image, title, location }) => {
     return (
-        <div className="flex flex-col justify-between h-fit bg-primary-white rounded-xl border border-stroke-200 overflow-hidden">
+        <div className="flex flex-col justify-between h-fit bg-primary-white rounded-xl hover:shadow-md transition-all duration-300 ease-in-out shadow-black/20 border border-stroke-200 overflow-hidden">
             <div className="flex items-center justify-center py-4 overflow-hidden">
                 <img src={image} alt="Restaurant Logo" className="max-w-full max-h-full object-contain" />
             </div>
@@ -13,7 +13,7 @@ export const BusinessCard = ({ image, title, location }) => {
                     <h1 className="text-primary-brown font-[Istok Web] font-medium overflow-hidden text-ellipsis whitespace-nowrap">{title}</h1>
                     <p className="text-primary-black/80 font-[Istok Web] text-[12px] overflow-hidden text-ellipsis whitespace-nowrap">📍{location}</p>
                 </div>
-                <button className="bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-brown font-[Istok Web] font-medium text-[12px] rounded-md px-4 py-2 border border-primary-black/50 flex-shrink-0">
+                <button className="bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[12px] rounded-md px-4 py-2 border border-primary-black/50 flex-shrink-0">
                     Open
                 </button>
             </div>
@@ -23,7 +23,7 @@ export const BusinessCard = ({ image, title, location }) => {
 
 export const GuideCard = ({ image, title, agency, description, link }) => {
     return (
-        <div className="flex h-fit w-fit bg-primary-white rounded-xl border border-stroke-200">
+        <div className="flex h-fit w-fit bg-secondary-blue/70 rounded-xl hover:shadow-md transition-all duration-300 ease-in-out shadow-black/20 border border-stroke-200">
             <div className="flex flex-col p-4 gap-2">
                 <div className="flex items-center gap-2">
                     <div>
@@ -44,17 +44,17 @@ export const GuideCard = ({ image, title, agency, description, link }) => {
                     Download <DownloadIcon className='w-4 h-4' /> 
                 </button>
                 <button onClick={() => window.open(link, '_blank')} className="flex gap-1 w-fit bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-brown font-[Istok Web] font-medium text-[14px] rounded-md px-4 py-2 border border-primary-black/50">
-                    <p className="text-primary-brown">See</p>
-                    <p className="text-primary-brown">More</p>
+                    <p className="text-primary-black">See</p>
+                    <p className="text-primary-black">More</p>
                 </button>
             </div>
         </div>
     );
 }
 
-export const LoanCard = ({ image, title, agency, description, link }) => {
+export const TrainingCard = ({ image, title, agency, description, link }) => {
     return (
-        <div className="flex flex-col h-fit w-full bg-primary-white rounded-xl border border-stroke-200 overflow-hidden">
+        <div className="flex flex-col h-fit w-full bg-secondary-orange/90 rounded-xl hover:shadow-md transition-all duration-300 ease-in-out shadow-black/20 border border-stroke-200 overflow-hidden">
             <div className="rounded-t-xl overflow-hidden">
                 <img src={image} alt="DTI Logo" className='w-full h-40 object-cover' />
             </div>
@@ -71,7 +71,34 @@ export const LoanCard = ({ image, title, agency, description, link }) => {
             </div>
 
             <div className="flex justify-start px-4 py-2">
-                <button className="flex gap-1 bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-brown font-[Istok Web] font-medium text-[14px] rounded-md px-4 py-2 border border-primary-black/50">
+                <button className="flex gap-1 bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md px-4 py-2 border border-primary-black/50">
+                    <a href={link} target="_blank" rel="noopener noreferrer">See More</a>
+                </button>
+            </div>
+        </div>
+    );
+}
+
+export const LoanCard = ({ image, title, agency, description, link }) => {
+    return (
+        <div className="flex flex-col h-fit w-full bg-primary-pink/10 rounded-xl hover:shadow-md transition-all duration-300 ease-in-out shadow-black/20 border border-stroke-200 overflow-hidden">
+            <div className="rounded-t-xl overflow-hidden">
+                <img src={image} alt="DTI Logo" className='w-full h-40 object-cover' />
+            </div>
+            <div className="flex flex-col px-4 py-4 gap-2">
+                <div className="flex items-center gap-2">
+                    <div>
+                        <h1 className="text-primary-black font-[Istok Web] text-[18px] font-medium overflow-hidden text-ellipsis whitespace-nowrap">{title}</h1>
+                        <p className="text-primary-black/80 font-[Istok Web] text-[12px] overflow-hidden text-ellipsis whitespace-nowrap">{agency}</p>
+                    </div>
+                </div>
+                <p className="text-primary-black font-[Istok Web] text-[14px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    {description}
+                </p>
+            </div>
+
+            <div className="flex justify-start px-4 py-2">
+                <button className="flex gap-1 bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md px-4 py-2 border border-primary-black/50">
                     <a href={link} target="_blank" rel="noopener noreferrer">See More</a>
                 </button>
             </div>
@@ -83,7 +110,7 @@ export const NotificationCard = ({ image, title, description, link, community = 
     const [isCommunity, setIsCommunity] = useState(community);
 
     return (
-        <div className="flex flex-col justify-between h-fit w-full bg-primary-white rounded-xl px-4 py-2 gap-4 border border-stroke-200">
+        <div className="flex flex-col justify-between h-fit w-full bg-secondary-blue/40 rounded-xl hover:shadow-md transition-all duration-300 ease-in-out  px-4 py-2 gap-4 border border-stroke-200">
             <div className="flex items-center gap-1">
                 <img src={image} alt="DTI Logo" className='w-[40px] h-[40px]' />
                 <div className="flex flex-col gap-1">
@@ -91,9 +118,9 @@ export const NotificationCard = ({ image, title, description, link, community = 
                     <p className="text-primary-black/80 font-[Istok Web] text-[12px]/[12px]">{description}</p>
                 </div>
             </div>
-            { isCommunity ? <button className="flex justify-center font-[Istok Web] font-medium text-[12px] border border-primary-black/50 rounded-md px-2 py-1 text-primary-black/80   hover:bg-secondary-black/5 transition-all duration-300 ">
+            { isCommunity ? <button className="flex justify-center font-[Istok Web] font-medium text-[12px] border border-primary-black/50 rounded-md px-2 py-1 text-primary-black/80 bg-primary-white  hover:bg-stroke-100/80 transition-all duration-300 ">
                 <a href={link} target="_blank" rel="noopener noreferrer" className='flex items-center gap-1'>Follow <AddIcon className='w-4 h-4 text-primary-black' /></a> 
-            </button> : <button className="font-[Istok Web] font-medium text-[12px] border border-primary-black/50 rounded-md px-2 py-1 text-primary-black/80  hover:bg-secondary-black/5 transition-all duration-300 ">
+            </button> : <button className="font-[Istok Web] font-medium text-[12px] border border-primary-black/50 rounded-md px-2 py-1 text-primary-black/80 bg-primary-white hover:bg-stroke-100/80 transition-all duration-300 ">
                 <a href={link} target="_blank" rel="noopener noreferrer">See More</a>
             </button> }
         </div>
