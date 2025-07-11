@@ -25,7 +25,7 @@ const LandingPage = () => {
                             <div className="flex items-center justify-center gap-2 font-[Istok Web] font-medium text-[16px] bg-secondary-red hover:bg-secondary-red/70 transition-all duration-300 text-primary-red rounded-full px-4 py-2"><Dot className="w-3 h-3 text-primary-red" /> Professional Guides</div>
                         </div>
                     </div>
-                    <button onClick={() => navigate('/feasibility')} className="bg-primary-pink text-white font-[Istok Web] font-medium text-[20px] rounded-lg hover:bg-primary-pink/90 hover:shadow-lg transition-all duration-300 px-5 py-3 w-fit flex items-center gap-2 mt-16">
+                    <button onClick={() => navigate('/onboarding')} className="bg-primary-pink text-white font-[Istok Web] font-medium text-[20px] rounded-lg hover:bg-primary-pink/90 hover:shadow-lg transition-all duration-300 px-5 py-3 w-fit flex items-center gap-2 mt-16">
                         <PlanIcon className="w-6 h-6" /> Start Planning
                     </button>
                 </div>  

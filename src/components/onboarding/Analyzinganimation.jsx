@@ -154,6 +154,7 @@ const LoadingAnimation = ({
                         minHeight: '370px',
                     }}
                 >
+                    {/** 
                     {isTransitioning ? (
                         <CircularProgress size={60} sx={{ color: '#f97316' }} />
                     ) : (
@@ -168,6 +169,7 @@ const LoadingAnimation = ({
                             Your browser does not support the video tag.
                         </video>
                     )}
+                        */}
                 </Box>
 
 

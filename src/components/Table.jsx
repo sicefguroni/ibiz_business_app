@@ -36,10 +36,10 @@ function TableComp({rows}) {
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                         <TableCell component="th" scope="row">
-                        {row.competitor}
+                        {row?.name || "Loading..."}
                         </TableCell>
-                        <TableCell align="left">{row.description}</TableCell>
-                        <TableCell align="center"><a href="https://react.dev/" target="_blank" ><button className="size-auto bg-primary-orange rounded-md py-1 px-2"><span className="text-primary-white">View</span></button></a></TableCell>
+                        <TableCell align="left">{row?.shortDescription || "Loading..."}</TableCell>
+                        <TableCell align="center"><a href={row.link} target="_blank" ><button className="size-auto bg-primary-orange rounded-md py-1 px-2"><span className="text-primary-white">View</span></button></a></TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
