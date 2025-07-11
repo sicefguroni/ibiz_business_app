@@ -8,7 +8,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 
 const StepLayout = ({ step, totalSteps, children, onNext, onAnalyze, onEdit, onBack }) => {
     return (
-        <div className="max-w-2xl w-full bg-white p-8 sm:p-10 rounded-2xl shadow-2xl border border-pink-400 space-y-6">
+        <div>
             {children}
 
             <Stack

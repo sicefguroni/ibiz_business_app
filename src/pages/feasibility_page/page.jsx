@@ -15,7 +15,7 @@ import TableComp from "../../components/Table";
 import FinanceDetail from "../../components/FinanceDetail";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { getAIResponse } from "../../backend/chat";
+
 
 function createData(competitor, description, link) {
   return { competitor, description, link };
@@ -26,8 +26,55 @@ function FeasibilityPage() {
   const location = useLocation();
   const { userData } = location.state || {}; 
   const [activeTab, setActiveTab] = useState("overview");
-  const [message, setMessage] = useState('');
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState({
+    businessName: "",
+    location: "",
+    summary: {
+      overallRating: "",
+      verdict: "",
+      overview: [
+        { category: "", rating: "", summary: "" },
+        { category: "", rating: "", summary: "" },
+        { category: "", rating: "", summary: "" },
+        { category: "", rating: "", summary: "" }
+      ],
+      keyFindings: [""]
+    },
+    category: {
+      productService: {
+        rating: "",
+        summary: "",
+        verdict: "",
+        strengths: [""],
+        risks: [""],
+        suggestions: [""]
+      },
+      market: {
+        rating: "",
+        summary: "",
+        verdict: "",
+        competitors: [{ name: "", shortDescription: "", link: "" }],
+        suggestions: [""]
+      },
+      organizational: {
+        rating: "",
+        summary: "",
+        verdict: "",
+        strengths: [""],
+        risks: [""],
+        suggestions: [""]
+      },
+      financial: {
+        rating: "",
+        summary: "",
+        verdict: "",
+        startupCapital: "",
+        monthlyRevenueRange: ["", ""],
+        breakevenMonths: ["", ""],
+        suggestions: [""]
+      }
+    }
+  });
   const [loading, setLoading] = useState(false);
 
   const user_details = `
@@ -44,19 +91,19 @@ function FeasibilityPage() {
   `;
 
   const navigate = useNavigate();
-  const results = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit. ",
-    "Morbi facilisis ipsum in dapibus luctus. Nullam urna tellus, porttitor in justo vitae, ornare fermentum quam. Aliquam erat volutpat. Ut consectetur mollis nulla nec consectetur.",
-    "Mauris eleifend nec elit at congue. Quisque interdum diam eget efficitur ornare. Fusce placerat dapibus augue id interdum."
-  ];
+  // const results = [
+  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit. ",
+  //   "Morbi facilisis ipsum in dapibus luctus. Nullam urna tellus, porttitor in justo vitae, ornare fermentum quam. Aliquam erat volutpat. Ut consectetur mollis nulla nec consectetur.",
+  //   "Mauris eleifend nec elit at congue. Quisque interdum diam eget efficitur ornare. Fusce placerat dapibus augue id interdum."
+  // ];
 
-  const summary = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit."]
+  // const summary = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit."]
 
-  const data = [
-    createData('Speedwash PH', 'A car wash no pay service', 'https://react.dev/'),
-    createData('Quicklean', 'Automated Service', 'https://react.dev/' ),
-    createData('LaundryBox Cebu', 'Man power heavy car wash', 'https://react.dev/'),
-  ];
+  // const data = [
+  //   createData('Speedwash PH', 'A car wash no pay service', 'https://react.dev/'),
+  //   createData('Quicklean', 'Automated Service', 'https://react.dev/' ),
+  //   createData('LaundryBox Cebu', 'Man power heavy car wash', 'https://react.dev/'),
+  // ];
 
   /*
   const result = {
@@ -138,25 +185,82 @@ function FeasibilityPage() {
 
   
   const handleSubmit = async (e) => {
-    setMessage(userData);
-    console.log("hi");
-    console.log(userData);
     e.preventDefault();
+    setResult({
+      businessName: "",
+      location: "",
+      summary: {
+        overallRating: "",
+        verdict: "",
+        overview: [
+          { category: "", rating: "", summary: "" },
+          { category: "", rating: "", summary: "" },
+          { category: "", rating: "", summary: "" },
+          { category: "", rating: "", summary: "" }
+        ],
+        keyFindings: [""]
+      },
+      category: {
+        productService: {
+          rating: "",
+          summary: "",
+          verdict: "",
+          strengths: [""],
+          risks: [""],
+          suggestions: [""]
+        },
+        market: {
+          rating: "",
+          summary: "",
+          verdict: "",
+          competitors: [{ name: "", shortDescription: "", link: "" }],
+          suggestions: [""]
+        },
+        organizational: {
+          rating: "",
+          summary: "",
+          verdict: "",
+          strengths: [""],
+          risks: [""],
+          suggestions: [""]
+        },
+        financial: {
+          rating: "",
+          summary: "",
+          verdict: "",
+          startupCapital: "",
+          monthlyRevenueRange: ["", ""],
+          breakevenMonths: ["", ""],
+          suggestions: [""]
+        }
+      }
+    });
     setLoading(true);
-    setResult(null);
+
+    console.log(userData);
 
     try {
-      const reply = await getAIResponse(message);
-      setResult(reply);
-      console.log(reply);
+    const response = await fetch('http://localhost:3000/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: userData }),
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to get AI response');
+    } 
+
+    const data = await response.json();
+    setResult(data.reply);
+    console.log(data.reply);  
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
   };  
-
-
 
   return (
     <>

@@ -30,7 +30,7 @@ const PricingModelStep = ({ formData, handleChange, handleMultiSelectChange, nex
     };
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 700, mx: 'auto', p: { xs: 2, sm: 4 } }}>
+        <Box>
             <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#333', mb: 4 }}>
                 How will you make money from it?
             </Typography>

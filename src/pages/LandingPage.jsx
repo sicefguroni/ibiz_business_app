@@ -9,7 +9,7 @@ const LandingPage = () => {
     
     return (
         <div className="h-screen landing-bg">
-            <Navbar isLandingPage={true} />
+            <Navbar isNotMainPage={true} />
             <div className="flex items-center justify-start h-full pl-40">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-4">

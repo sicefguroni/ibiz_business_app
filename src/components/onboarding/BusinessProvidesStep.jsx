@@ -31,7 +31,7 @@ const BusinessProvidesStep = ({ formData, handleChange, handleMultiSelectChange,
     };
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 700, mx: 'auto', p: { xs: 2, sm: 4 } }}>
+        <Box>
             <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#333', mb: 4 }}>
                 What does your business provide?
             </Typography>

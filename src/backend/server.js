@@ -126,8 +126,6 @@ app.post('/chat', async (req, res) => {
     const raw = chatResponse.choices[0].message.content;
     console.log("Raw GPT response:", raw);
 
- 
-
     /*
     const match = raw.match(/```json\n([\s\S]*?)\n```/);
     if (match && match[1]) {
@@ -138,7 +136,7 @@ app.post('/chat', async (req, res) => {
 
     // Try parsing
 
-    const response = raw.trim();
+    let response = raw.trim();
     if (response.startsWith("```json")) {
       response = response.replace(/^```json/, "").replace(/```$/, "").trim();
     }
