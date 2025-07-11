@@ -76,7 +76,7 @@ const Step6Summary = ({ formData, onEdit }) => {
     };
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 700, mx: 'auto', p: { xs: 2, sm: 4 } }}>
+        <Box>
             {/* Main heading for the summary */}
             <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#333', mb: 4 }}>
                 <LightbulbOutlined sx={{ mr: 1, color: '#f97316' }} /> Your Business Idea's Details

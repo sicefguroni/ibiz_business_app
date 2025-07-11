@@ -13,7 +13,7 @@ import Groups from '@mui/icons-material/Groups';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const Navbar = ({ isLandingPage = false, tab = '/home', isCommunity = false }) => {
+const Navbar = ({ isNotMainPage = false, tab = '/home', isCommunity = false }) => {
     const [activeTab, setActiveTab] = useState(tab);
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const Navbar = ({ isLandingPage = false, tab = '/home', isCommunity = false }) =
             </div>
 
 
-            {!isLandingPage && (    
+            {!isNotMainPage && (    
                 <ul className="bg-primary-white border border-stroke-300 self-center flex items-center gap-1 px-1 py-1 rounded-full">
                     <li onClick={() => handleNavigate('/home')} className={`group hover:bg-stroke-200/40 hover:text-primary-pink transition-all duration-300 font-[Istok Web] flex items-center gap-2 px-4 py-2 rounded-full ${activeTab === '/home' ? 'bg-stroke-200/30 text-primary-pink' : 'text-primary-black/60'} cursor-pointer`}>
                         {activeTab === '/home' ? <HomeIconSolid className={`${activeTab === '/home' ? 'opacity-100' : 'opacity-60'} w-6 h-6 group-hover:opacity-100 transition-all duration-300`} /> : <HomeIconOutline className={`${activeTab === '/home' ? 'opacity-100' : 'opacity-60'} w-6 h-6 group-hover:opacity-100 transition-all duration-300`} />} Home</li>

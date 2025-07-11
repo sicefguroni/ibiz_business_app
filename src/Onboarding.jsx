@@ -10,10 +10,8 @@ import Step6Summary from './components/onboarding/Summarypage';
 import LoadingAnimation from './components/onboarding/Analyzinganimation';
 
 import StepLayout from './components/StepLayout';
-import FloatingCard from './components/card';
 import StepProgressBar from './components/ProgressBar';
-
-import OnboardingBackground from './assets/Onboardingbg.png';
+import Navbar from './components/Navbar';
 
 const Onboarding = () => {
     const navigate = useNavigate();
@@ -34,14 +32,6 @@ const Onboarding = () => {
         capitalRange: 0,
     });
     const [submissionStatus, setSubmissionStatus] = useState('idle');
-
-    useEffect(() => {
-        document.body.style.backgroundImage = `url(${OnboardingBackground})`;
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundPosition = 'center';
-        document.body.style.backgroundAttachment = 'fixed';
-        document.body.style.backgroundColor = '#fbf2ec';
-    }, [step]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -64,32 +54,9 @@ const Onboarding = () => {
     const prevStep = () => setStep((prev) => Math.max(1, prev - 1));
 // hellop
     const handleSubmit = async () => {
-        /*
-        setSubmissionStatus('loading');
-        setStep(7);
-        try {
-            const response = await fetch('http://localhost:5000/api/onboarding', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-            const data = await response.json();
-            const stringData = JSON.stringify(data);
-            navigate('/feasibility', { state: { userData: stringData } });
-
-            setSubmissionStatus('success') 
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            setSubmissionStatus('error');
-        } */
-
         const data = JSON.stringify(formData);
 
-        navigate('/feasibility', { state: { userData: data } });
-
-        
-        
-        
+        navigate('/feasibility', { state: { userData: data } }); 
     };
 
     const handleCreate = () => {
@@ -185,28 +152,12 @@ const Onboarding = () => {
 
     return (
         <>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-                body {
-                    font-family: 'Inter', sans-serif;
-                    background-color: #F9F1EA;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    min-height: 100vh;
-                    margin: 0;
-                    transition: background-image 0.5s ease-in-out;
-                    overflow-y: auto;
-                }
-            `}</style>
-
-            <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 w-full bg-[#F9F1EA]">
+            <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 w-full landing-bg">
+                <Navbar isNotMainPage={true}/>
                 {step <= 6 && <StepProgressBar currentStep={step} />}
 
                 {step <= 6 ? (
-                    <FloatingCard>
-                        {renderStepContent()}
-                    </FloatingCard>
+                    renderStepContent()
                 ) : (
                     renderStepContent()
                 )}
