@@ -6,6 +6,7 @@ import TrainingsPage from './pages/TrainingsPage';
 import LoansPage from './pages/LoansPage';
 import CommunityPage from './pages/CommunityPage';
 import FeasibilityPage from './pages/feasibility_page/page';
+import Onboarding from './Onboarding';
 
 
 
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/guides" element={<GuidesPage />} />
         <Route path="/trainings" element={<TrainingsPage />} />

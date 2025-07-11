@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import BusinessIdeaStep from './components/onboarding/BusinessIdeaStep';
 import BeneficiariesStep from './components/onboarding/BeneficiariesStep';
@@ -15,6 +16,7 @@ import StepProgressBar from './components/ProgressBar';
 import OnboardingBackground from './assets/Onboardingbg.png';
 
 const Onboarding = () => {
+    const navigate = useNavigate();
     const totalSteps = 5;
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -60,8 +62,9 @@ const Onboarding = () => {
 
     const nextStep = () => setStep((prev) => prev + 1);
     const prevStep = () => setStep((prev) => Math.max(1, prev - 1));
-
+// hellop
     const handleSubmit = async () => {
+        /*
         setSubmissionStatus('loading');
         setStep(7);
         try {
@@ -70,11 +73,23 @@ const Onboarding = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
-            response.ok ? setSubmissionStatus('success') : setSubmissionStatus('error');
+            const data = await response.json();
+            const stringData = JSON.stringify(data);
+            navigate('/feasibility', { state: { userData: stringData } });
+
+            setSubmissionStatus('success') 
         } catch (error) {
             console.error('Error submitting form:', error);
             setSubmissionStatus('error');
-        }
+        } */
+
+        const data = JSON.stringify(formData);
+
+        navigate('/feasibility', { state: { userData: data } });
+
+        
+        
+        
     };
 
     const handleCreate = () => {
