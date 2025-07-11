@@ -9,7 +9,7 @@ function SubScore({category, summary, score, bgSecondaryColor, bdPrimaryColor, t
           <div>
             <FontAwesomeIcon
               icon={faStar}
-              className="text-primary-yellow"
+              className={txPrimaryColor}
             ></FontAwesomeIcon>
           </div>
           <p className="leading-none mt-2">{score}</p>
