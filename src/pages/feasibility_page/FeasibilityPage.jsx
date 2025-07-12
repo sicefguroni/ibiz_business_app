@@ -17,11 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 
-function createData(competitor, description, link) {
-  return { competitor, description, link };
-}
-
-
 function FeasibilityPage() {
   const location = useLocation();
   const { userData } = location.state || {}; 
@@ -91,99 +86,7 @@ function FeasibilityPage() {
   `;
 
   const navigate = useNavigate();
-  // const results = [
-  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit. ",
-  //   "Morbi facilisis ipsum in dapibus luctus. Nullam urna tellus, porttitor in justo vitae, ornare fermentum quam. Aliquam erat volutpat. Ut consectetur mollis nulla nec consectetur.",
-  //   "Mauris eleifend nec elit at congue. Quisque interdum diam eget efficitur ornare. Fusce placerat dapibus augue id interdum."
-  // ];
 
-  // const summary = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit."]
-
-  // const data = [
-  //   createData('Speedwash PH', 'A car wash no pay service', 'https://react.dev/'),
-  //   createData('Quicklean', 'Automated Service', 'https://react.dev/' ),
-  //   createData('LaundryBox Cebu', 'Man power heavy car wash', 'https://react.dev/'),
-  // ];
-
-  /*
-  const result = {
-              "businessName": "EcoWash Mobile Laundry",
-              "location": "Cebu City",
-              "date": "2023-10-04",
-              "summary": {
-                  "overallRating": 7.50,
-                  "verdict": "Moderately Feasible",
-                  "overview": [
-                      {
-                          "category": "Products/Service",
-                          "rating": 8.0,
-                          "summary": "Innovative and eco-friendly laundry service catering to busy professionals and students."
-                      },
-                      {
-                          "category": "Market",
-                          "rating": 7.0,
-                          "summary": "Target market is well-defined, but competitive landscape in Cebu City needs to be assessed."
-                      },
-                      {
-                          "category": "Organization",
-                          "rating": 7.5,
-                          "summary": "Strong logistics and laundromat partnership. Mobile app development experience is a plus."
-                      },
-                      {
-                          "category": "Finance",
-                          "rating": 7.5,
-                          "summary": "Initial capital is modest; pricing strategy seems feasible for the target market."
-                      }
-                  ],
-                  "keyFindings": "The mobile laundry service is a promising venture with a strong focus on eco-friendliness and convenience. Financial projections and market competition analysis are recommended for further validation."
-              },
-              "category": {
-                  "productService": {
-                      "rating": 8.0,
-                      "summary": "Mobile laundry service focusing on eco-friendly practices and convenience.",
-                      "verdict": "Highly Feasible",
-                      "strengths": ["Eco-friendly approach", "Convenience of pickup and delivery", "Partnership with established laundromat"],
-                      "risks": ["Dependency on mobile app functionality", "High operational logistics cost"],
-                      "suggestions": ["Develop a strong marketing plan", "Ensure high-quality app functionality"]
-                  },
-                  "market": {
-                      "rating": 7.0,
-                      "summary": "Defined target market with growth potential, but competitive analysis is lacking.",
-                      "verdict": "Moderately Feasible",
-                      "competitors": [
-                          {
-                              "name": "Local Laundromats",
-                              "shortDescription": "Traditional laundromats without pickup/delivery.",
-                              "link": "n/a"
-                          },
-                          {
-                              "name": "Existing Laundry Apps",
-                              "shortDescription": "Apps that might offer similar services.",
-                              "link": "n/a"
-                          }
-                      ],
-                      "suggestions": ["Conduct a detailed competitor analysis", "Identify unique selling propositions"]
-                  },
-                  "organizational": {
-                      "rating": 7.5,
-                      "summary": "Good foundation with relevant expertise and partnerships.",
-                      "verdict": "Moderately Feasible",
-                      "strengths": ["Logistics experience", "Laundromat partnership", "Mobile app development experience"],
-                      "risks": ["Dependence on a few key individuals", "Scaling challenges"],
-                      "suggestions": ["Expand the team with diverse skills", "Plan for scaling operations in advance"]
-                  },
-                  "financial": {
-                      "rating": 7.5,
-                      "summary": "Initial investment aligns with business requirements, but detailed financial projections are needed.",
-                      "startupCapital": 100000,
-                      "monthlyRevenueRange": [45000, 90000],
-                      "breakevenMonths": [12, 24],
-                      "suggestions": ["Prepare detailed financial projections", "Explore additional funding options for scaling"]
-                  }
-              }
-          } */
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setResult({
@@ -371,9 +274,6 @@ function FeasibilityPage() {
               <button className="bg-stroke-100 border-t-stroke-200 border-[2px] py-1 px-3 mr-2 rounded-xl shadow-s" onClick={handleSubmit}>Retry Analysis <FontAwesomeIcon icon={faRotateRight} className="text-primary-pink"></FontAwesomeIcon></button>
               <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={() => navigate('/home')}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
             </div>
-
-
-  
 
           </div>
         </div>

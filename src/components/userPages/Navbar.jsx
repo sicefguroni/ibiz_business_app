@@ -1,4 +1,4 @@
-import WebLogo from '../assets/web-logo.svg';
+import WebLogo from '../../assets/web-logo.svg';
 import { HomeIcon as HomeIconOutline } from '@heroicons/react/24/outline';
 import { HomeIcon as HomeIconSolid } from '@heroicons/react/24/solid';
 import { BookOpenIcon as GuidesIconOutline } from '@heroicons/react/24/outline';

@@ -4,132 +4,65 @@ import Stack from '@mui/material/Stack';
 
 import EditIcon from '@mui/icons-material/Edit';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
+const StepLayout = ({ step, totalSteps, children, onNext, onAnalyze, onEdit, onBack, title }) => {
 
-const StepLayout = ({ step, totalSteps, children, onNext, onAnalyze, onEdit, onBack }) => {
-    return (
-        <div>
-            {children}
-
-            <Stack
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-                sx={{
-                    mt: 0.1,
-                    mb: 3,
-                    pt: 0,
-                }}
+    const onboardingButton = (buttonName, icon, onClick, isBack = false) => {
+        return isBack ? (
+            <button
+                className='flex items-center gap-2 bg-primary-white hover:bg-stroke-100/50 transition-all duration-300 text-primary-black border border-primary-pink rounded-full px-8 py-2 text-[16px] font-medium'
+                onClick={onClick}
             >
+                {icon} {buttonName}
+            </button>
+        ) : (
+            <button
+                className='flex items-center gap-2 bg-primary-pink hover:bg-primary-pink/90 transition-all duration-300 text-primary-white rounded-full px-8 py-2 text-[16px] font-medium'
+                onClick={onClick}
+            >
+                {buttonName} {icon}
+            </button>
+        );
+    }
+
+    const LayoutTitle = ({ title }) => {
+        return (
+            <h1 className='text-3xl font-medium text-center py-8'>
+                {title}
+            </h1>
+        )
+    }
+
+    return (
+        <div className='flex flex-col'>
+            <div className='flex flex-col'>
+                <LayoutTitle title={title} />
+                {children}
+            </div>
+
+            <div className='flex justify-center items-center gap-8'>
                 {step > 1 && step < 6 && (
-                    <Button
-                        variant="outlined"
-                        color="inherit"
-                        onClick={onBack}
-                        sx={{
-                            borderRadius: '9999px',
-                            px: 4,
-                            py: 1.5,
-                            textTransform: 'none',
-                            fontWeight: 'bold',
-                            borderColor: '#FF69B4',
-                            color: '#FF69B4',
-                            '&:hover': {
-                                backgroundColor: 'rgba(255, 105, 180, 0.08)',
-                                borderColor: '#FF69B4',
-                            },
-                        }}
-                    >
-                        ← Back
-                    </Button>
+                    onboardingButton('Back', <ArrowBackRoundedIcon sx={{ fontSize: 18 }} />, onBack, true)
                 )}
 
                 {step < totalSteps ? (
                     step === totalSteps - 1 ? (
-                        <Button
-                            variant="contained"
-                            onClick={onNext}
-                            sx={{
-                                bgcolor: '#FF69B4',
-                                color: 'white',
-                                borderRadius: '9999px',
-                                px: 5,
-                                py: 1.5,
-                                textTransform: 'none',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                                    backgroundColor: '#ff519f',
-                                },
-                            }}
-                        >
-                            Create →
-                        </Button>
+                        onboardingButton('Create', <ArrowForwardRoundedIcon sx={{ fontSize: 18 }} />, onNext)
                     ) : (
-                        <Button
-                            variant="contained"
-                            onClick={onNext}
-                            sx={{
-                                bgcolor: '#FF69B4',
-                                color: 'white',
-                                borderRadius: '9999px',
-                                px: 5,
-                                py: 1.5,
-                                textTransform: 'none',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                                    backgroundColor: '#ff519f',
-                                },
-                            }}
-                        >
-                            Next →
-                        </Button>
+                        onboardingButton('Next', <ArrowForwardRoundedIcon sx={{ fontSize: 18 }} />, onNext)
                     )
                 ) : (
                     <>
-                        <Button
-                            variant="outlined"
-                            onClick={onEdit}
-                            startIcon={<EditIcon sx={{ color: '#FF69B4' }} />}
-                            sx={{
-                                borderRadius: '9999px',
-                                px: 4,
-                                py: 1.5,
-                                textTransform: 'none',
-                                fontWeight: 'bold',
-                                borderColor: '#FF69B4',
-                                color: '#FF69B4',
-                                '&:hover': {
-                                    backgroundColor: 'rgba(255, 105, 180, 0.08)',
-                                    borderColor: '#FF69B4',
-                                },
-                            }}
-                        >
-                            Edit Info
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={onAnalyze}
-                            startIcon={<BarChartIcon sx={{ color: 'white' }} />}
-                            sx={{
-                                bgcolor: '#FF69B4',
-                                color: 'white',
-                                borderRadius: '9999px',
-                                px: 5,
-                                py: 1.5,
-                                textTransform: 'none',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                                    backgroundColor: '#ff519f',
-                                },
-                            }}
-                        >
-                            Analyze Feasibility
-                        </Button>
+                        {onboardingButton('Edit Info', <EditIcon className='text-primary-black font-[18px]' />, onEdit, true)}
+                        {onboardingButton('Analyze Feasibility', <BarChartIcon />, onAnalyze)}
                     </>
                 )}
-            </Stack>
+            </div>
         </div>
     );
 };
 
 export default StepLayout;
+                              

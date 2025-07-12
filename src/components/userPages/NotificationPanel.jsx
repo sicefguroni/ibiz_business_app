@@ -1,5 +1,5 @@
 import { NotificationCard } from "./PageCards";
-import DTIPic from '../assets/page-cards/dti-logo.png';
+import DTIPic from '../../assets/page-cards/dti-logo.png';
 import { useState } from "react";
 
 const NotificationPanel = ({ home = false, community = false }) => {
