@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import BusinessIdeaStep from './components/onboarding/BusinessIdeaStep';
 import BeneficiariesStep from './components/onboarding/BeneficiariesStep';
@@ -15,6 +15,7 @@ import Navbar from './components/Navbar';
 
 const Onboarding = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const totalSteps = 5;
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -149,6 +150,14 @@ const Onboarding = () => {
             </StepLayout>
         );
     };
+
+    useEffect(() => {
+        if (location?.state) {
+            let data = location?.state.userData;
+            let jsonData = JSON.parse(data);
+            setFormData(jsonData);
+        }
+    }, []);
 
     return (
         <>

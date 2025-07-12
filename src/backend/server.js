@@ -95,7 +95,7 @@ app.post('/chat', async (req, res) => {
                                 "financial": {
                                 "rating": number,
                                 "summary": "string",
-                                "verdict": "string"
+                                "verdict": "string",
                                 "startupCapital": "string-number",
                                 "monthlyRevenueRange": ["string-number", "string-number"],
                                 "breakevenMonths": ["string-number", "string-number"],
