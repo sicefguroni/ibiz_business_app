@@ -1,10 +1,10 @@
-import Navbar from "../components/Navbar";
-import UserProfile from "../components/UserProfile";
-import NotificationPanel from "../components/NotificationPanel";
-import PageBody from "../components/PageBodies";
-import { BusinessCard } from "../components/PageCards";
-import RestaurantLogo from "../assets/page-cards/restaurant-logo.png";
-import FeasibilityReport from "./feasibility_page/page";
+import Navbar from "../../components/userPages/Navbar";
+import UserProfile from "../../components/userPages/UserProfile";
+import NotificationPanel from "../../components/userPages/NotificationPanel";
+import PageBody from "../../components/userPages/PageBodies";
+import { BusinessCard } from "../../components/userPages/PageCards";
+import RestaurantLogo from "../../assets/page-cards/restaurant-logo.png";
+import FeasibilityReport from "../../pages/feasibility_page/FeasibilityPage";
 
 const HomePage = () => {
     return (

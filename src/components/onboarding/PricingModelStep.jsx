@@ -30,106 +30,68 @@ const PricingModelStep = ({ formData, handleChange, handleMultiSelectChange, nex
     };
 
     return (
-        <Box>
-            <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#333', mb: 4 }}>
-                How will you make money from it?
-            </Typography>
+        <div className='w-[640px] h-[400px]'>
+          {/* Custom Chips with Icons */}
+          <div className="flex flex-wrap gap-2 mb-4 justify-center">
+            {[
+              { label: 'Charge fees', icon: '💰' },
+              { label: 'Custom pricing', icon: '⚙️' },
+              { label: 'Subscription', icon: '🔄' },
+              { label: 'Lending/Rent', icon: '🏦' },
+              { label: 'Others', icon: '…' }
+            ].map(({ label, icon }) => (
+              <button
+                key={label}
+                type="button"
+                onClick={() => handleMultiSelectChange('pricingModel', label)}
+                className={`
+                  flex items-center gap-2 px-4 py-2 rounded-full border font-medium transition-all duration-200
+                  ${formData.pricingModel.includes(label)
+                    ? 'bg-primary-orange text-white border-primary-orange'
+                    : 'bg-white text-primary-orange border-primary-orange hover:bg-yellow-100'}
+                `}
+              >
+                <span className="text-lg">{icon}</span>
+                {label}
+              </button>
+            ))}
+          </div>
 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mb: 4, justifyContent: 'center' }}>
-                {[
-                    'Charge fees',
-                    'Custom pricing',
-                    'Subscription',
-                    'Lending/Rent',
-                    'Others'
-                ].map((model) => (
-                    <Chip
-                        key={model}
-                        label={model}
-                        onClick={() => handleMultiSelectChange('pricingModel', model)}
-                        icon={getPricingIcon(model)}
-                        sx={{
-                            backgroundColor: formData.pricingModel.includes(model) ? '#f97316' : '#fff',
-                            color: formData.pricingModel.includes(model) ? '#fff' : '#f97316',
-                            border: `1px solid ${formData.pricingModel.includes(model) ? '#f97316' : '#f97316'}`,
-                            fontWeight: 'medium',
-                            padding: '8px 12px',
-                            borderRadius: '20px',
-                            '& .MuiChip-icon': {
-                                color: formData.pricingModel.includes(model) ? '#fff' : '#f97316',
-                            },
-                            '&:hover': {
-                                backgroundColor: formData.pricingModel.includes(model) ? '#e06000' : '#fef3c7',
-                            },
-                        }}
-                    />
-                ))}
-            </Box>
+          {/* Custom input for 'Others' */}
+          {formData.pricingModel.includes('Others') && (
+            <div className="mb-4">
+              <label htmlFor="customPricing" className="flex items-center gap-2 text-primary-orange font-medium mb-2">
+                <span role="img" aria-label="more">…</span> Specify other pricing models
+              </label>
+              <input
+                id="customPricing"
+                name="customPricing"
+                type="text"
+                value={formData.customPricing}
+                onChange={handleChange}
+                className="w-full rounded-xl border-2 border-pink-400 focus:border-pink-400 focus:ring-2 focus:ring-pink-400 text-base text-gray-800 p-3 placeholder:text-gray-400 outline-none transition-all duration-200"
+                placeholder="Specify other pricing models"
+              />
+            </div>
+          )}
 
-            {formData.pricingModel.includes('Others') && (
-                <Box sx={{ mb: 4 }}>
-                    <TextField
-                        id="customPricing"
-                        name="customPricing"
-                        label={
-                            <Box sx={{ display: 'flex', alignItems: 'center', color: '#f97316' }}>
-                                <MoreHorizOutlined sx={{ mr: 1 }} /> Specify other pricing models
-                            </Box>
-                        }
-                        value={formData.customPricing}
-                        onChange={handleChange}
-                        fullWidth
-                        variant="outlined"
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                borderRadius: '12px',
-                                borderColor: '#FF69B4',
-                                '& fieldset': { borderColor: '#FF69B4' },
-                                '&:hover fieldset': { borderColor: '#FF69B4' },
-                                '&.Mui-focused fieldset': { borderColor: '#FF69B4', borderWidth: '2px' },
-                            },
-                            '& .MuiInputLabel-root': { color: '#f97316', fontWeight: 'medium', '&.Mui-focused': { color: '#f97316' } },
-                            '& .MuiInputBase-input': { color: '#333' },
-                            '& .MuiInputBase-input::placeholder': { color: '#999' },
-                        }}
-                    />
-                </Box>
-            )}
-
-            <Box sx={{ mb: 4 }}>
-                <Typography variant="body2" color="text.secondary" align="right" sx={{ mb: 1 }}>
-                    {formData.pricingDescription?.length || 0}/{maxCharacters} characters
-                </Typography>
-                <TextField
-                    id="pricingDescription"
-                    name="pricingDescription"
-                    label={
-                        <Box sx={{ display: 'flex', alignItems: 'center', color: '#f97316' }}>
-                            <EditOutlined sx={{ mr: 1 }} /> Mention your pricing model — will you charge a fee, sell a product, offer subscriptions, or rely on ads?
-                        </Box>
-                    }
-                    value={formData.pricingDescription || ''}
-                    onChange={handleChange}
-                    multiline
-                    rows={6}
-                    fullWidth
-                    variant="outlined"
-                    inputProps={{ maxLength: maxCharacters }}
-                    sx={{
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: '12px',
-                            borderColor: '#FF69B4',
-                            '& fieldset': { borderColor: '#FF69B4' },
-                            '&:hover fieldset': { borderColor: '#FF69B4' },
-                            '&.Mui-focused fieldset': { borderColor: '#FF69B4', borderWidth: '2px' },
-                        },
-                        '& .MuiInputLabel-root': { color: '#f97316', fontWeight: 'medium', '&.Mui-focused': { color: '#f97316' } },
-                        '& .MuiInputBase-input': { color: '#333' },
-                        '& .MuiInputBase-input::placeholder': { color: '#999' },
-                    }}
-                />
-            </Box>
-        </Box>
+          <div>
+            <p className="text-sm text-right mb-1 text-secondary-black italic">
+              {formData.pricingDescription?.length || 0}/{maxCharacters} characters
+            </p>
+           
+            <textarea
+              id="pricingDescription"
+              name="pricingDescription"
+              value={formData.pricingDescription || ''}
+              onChange={handleChange}
+              rows={6}
+              maxLength={maxCharacters}
+              className="w-full rounded-xl border-2 border-pink-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 text-base text-gray-800 p-3 placeholder:text-gray-400 outline-none transition-all duration-200"
+              placeholder="✏️ Describe your pricing model in detail."
+            />
+          </div>
+        </div>
     );
 };
 

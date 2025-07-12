@@ -1,5 +1,5 @@
 import { DownloadIcon } from 'lucide-react';
-import AddIcon from '../assets/page-cards/add-icon.svg?react';
+import AddIcon from '../../assets/page-cards/add-icon.svg?react';
 import { useState } from 'react';
 
 export const BusinessCard = ({ image, title, location, description, feasibilityReport,  PDF }) => {

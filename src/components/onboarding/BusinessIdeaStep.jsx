@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TextField, Typography, Box, Paper, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
-import LightbulbOutlined from '@mui/icons-material/LightbulbOutlined';
-import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined';
 
 /**
  * BusinessIdeaStep Component
@@ -99,156 +96,66 @@ const BusinessIdeaStep = ({ formData, handleChange, nextStep, prevStep }) => {
     }, []);
 
     return (
-        <Box >
-            <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#333', mb: 4 }}>
+        <div className='w-[640px] h-[435px] flex flex-col justify-evenly'>
+            <h1 className='text-3xl font-medium text-center'>
                 What's your business idea?
-            </Typography>
+            </h1>
 
-            <Box sx={{ mb: 4 }}>
-                <Typography variant="body2" color="text.secondary" align="right" sx={{ mb: 1 }}>
+            <div>
+                <p className='text-sm text-right mb-1 text-secondary-black italic'>
                     {formData.businessIdea.length}/{maxCharacters} characters
-                </Typography>
-                <TextField
+                </p>
+                <textarea
                     id="businessIdea"
                     name="businessIdea"
-                    label={
-                        <Box sx={{ display: 'flex', alignItems: 'center', color: '#f97316' }}>
-                            <LightbulbOutlined sx={{ mr: 1 }} /> Describe your business idea in detail for accurate assessment
-                        </Box>
-                    }
                     value={formData.businessIdea}
                     onChange={handleChange}
-                    multiline
                     rows={6}
-                    fullWidth
-                    variant="outlined"
-                    inputProps={{ maxLength: maxCharacters }}
-                    sx={{
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: '12px',
-                            borderColor: '#FF69B4',
-                            '& fieldset': {
-                                borderColor: '#FF69B4',
-                            },
-                            '&:hover fieldset': {
-                                borderColor: '#FF69B4',
-                            },
-                            '&.Mui-focused fieldset': {
-                                borderColor: '#FF69B4',
-                                borderWidth: '2px',
-                            },
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#f97316',
-                            fontWeight: 'medium',
-                            '&.Mui-focused': {
-                                color: '#f97316',
-                            },
-                        },
-                        '& .MuiInputBase-input': {
-                            color: '#333',
-                        },
-                        '& .MuiInputBase-input::placeholder': {
-                            color: '#999',
-                        },
-                    }}
+                    maxLength={maxCharacters}
+                    className="w-full rounded-xl border-2 border-pink-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 text-base text-gray-800 p-3 placeholder:text-gray-400 outline-none transition-all duration-200"
+                    placeholder="💡Describe your business idea in detail for accurate assessment"
                 />
-            </Box>
+            </div>
 
-            <Box sx={{ position: 'relative' }} ref={suggestionsRef}>
-                <TextField
+            <div className='relative' ref={suggestionsRef}>
+                <input
                     id="businessLocation"
                     name="businessLocation"
-                    label={
-                        <Box sx={{ display: 'flex', alignItems: 'center', color: '#f97316' }}>
-                            <LocationOnOutlined sx={{ mr: 1 }} /> Enter the location of your business
-                        </Box>
-                    }
+                    type="text"
                     value={formData.businessLocation}
                     onChange={(e) => {
                         handleChange(e);
                         setShowSuggestions(true);
                     }}
                     onFocus={() => setShowSuggestions(true)}
-                    fullWidth
-                    variant="outlined"
                     autoComplete="off"
-                    sx={{
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: '12px',
-                            borderColor: '#FF69B4',
-                            '& fieldset': {
-                                borderColor: '#FF69B4',
-                            },
-                            '&:hover fieldset': {
-                                borderColor: '#FF69B4',
-                            },
-                            '&.Mui-focused fieldset': {
-                                borderColor: '#FF69B4',
-                                borderWidth: '2px',
-                            },
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#f97316',
-                            fontWeight: 'medium',
-                            '&.Mui-focused': {
-                                color: '#f97316',
-                            },
-                        },
-                        '& .MuiInputBase-input': {
-                            color: '#333',
-                        },
-                        '& .MuiInputBase-input::placeholder': {
-                            color: '#999',
-                        },
-                    }}
+                    className="w-full rounded-xl border-2 border-pink-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 text-base text-gray-800 p-3 placeholder:text-gray-400 outline-none transition-all duration-200"
+                    placeholder="📍Enter the location of your business"
                 />
 
                 {showSuggestions && (formData.businessLocation.length >= 3 || loadingSuggestions) && (
-                    <Paper
-                        sx={{
-                            position: 'absolute',
-                            zIndex: 20,
-                            width: '100%',
-                            mt: 1,
-                            borderRadius: '8px',
-                            boxShadow: 3,
-                            maxHeight: 200,
-                            overflowY: 'auto',
-                        }}
-                    >
+                    <div className="absolute z-20 w-full mt-1 rounded-lg shadow-lg bg-white max-h-52 overflow-y-auto border border-gray-200">
                         {loadingSuggestions ? (
-                            <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
-                                <CircularProgress size={24} sx={{ color: '#f97316' }} />
-                            </Box>
+                            <div className="flex justify-center p-2 text-primary-orange">Loading...</div>
                         ) : locationSuggestions.length > 0 ? (
-                            <List>
+                            <ul>
                                 {locationSuggestions.map((suggestion, index) => (
-                                    <ListItem
+                                    <li
                                         key={index}
                                         onClick={() => handleSelectSuggestion(suggestion)}
-                                        sx={{
-                                            cursor: 'pointer',
-                                            '&:hover': {
-                                                backgroundColor: '#fef3c7',
-                                            },
-                                            borderBottom: '1px solid #eee',
-                                            '&:last-child': {
-                                                borderBottom: 'none',
-                                            },
-                                        }}
+                                        className="cursor-pointer px-4 py-2 hover:bg-yellow-100 border-b border-gray-100 last:border-b-0 text-gray-800"
                                     >
-                                        <ListItemText primary={suggestion} sx={{ color: '#333' }} />
-                                    </ListItem>
+                                        {suggestion}
+                                    </li>
                                 ))}
-                            </List>
+                            </ul>
                         ) : (
-                            <Typography sx={{ p: 2, color: '#666' }}>No suggestions found.</Typography>
+                            <div className="p-2 text-gray-500">No suggestions found.</div>
                         )}
-                    </Paper>
+                    </div>
                 )}
-            </Box>
-        </Box>
+            </div>
+        </div>
     );
 };
 
