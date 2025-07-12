@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckToSlot, faLightbulb, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
@@ -17,15 +17,12 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 
-function createData(competitor, description, link) {
-  return { competitor, description, link };
-}
-
-
 function FeasibilityPage() {
   const location = useLocation();
   const { userData } = location.state || {}; 
   const [activeTab, setActiveTab] = useState("overview");
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState(false);
   const [result, setResult] = useState({
     businessName: "",
     location: "",
@@ -76,7 +73,8 @@ function FeasibilityPage() {
     }
   });
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  
   const user_details = `
         1. What is your business idea?
           I want to create a mobile laundry pickup and delivery service in Cebu City. Customers can book via an app, and we’ll pick up, wash, and return clothes within 24–48 hours.
@@ -90,102 +88,13 @@ function FeasibilityPage() {
           I want this to be eco-friendly by using biodegradable laundry products. I’m also hoping it creates job opportunities for riders.
   `;
 
-  const navigate = useNavigate();
-  // const results = [
-  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit. ",
-  //   "Morbi facilisis ipsum in dapibus luctus. Nullam urna tellus, porttitor in justo vitae, ornare fermentum quam. Aliquam erat volutpat. Ut consectetur mollis nulla nec consectetur.",
-  //   "Mauris eleifend nec elit at congue. Quisque interdum diam eget efficitur ornare. Fusce placerat dapibus augue id interdum."
-  // ];
-
-  // const summary = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar nisi id massa sodales efficitur. Nulla at sollicitudin mauris. Vestibulum luctus, magna at semper vehicula, augue erat ornare tellus, quis venenatis augue augue sit amet velit."]
-
-  // const data = [
-  //   createData('Speedwash PH', 'A car wash no pay service', 'https://react.dev/'),
-  //   createData('Quicklean', 'Automated Service', 'https://react.dev/' ),
-  //   createData('LaundryBox Cebu', 'Man power heavy car wash', 'https://react.dev/'),
-  // ];
-
-  /*
-  const result = {
-              "businessName": "EcoWash Mobile Laundry",
-              "location": "Cebu City",
-              "date": "2023-10-04",
-              "summary": {
-                  "overallRating": 7.50,
-                  "verdict": "Moderately Feasible",
-                  "overview": [
-                      {
-                          "category": "Products/Service",
-                          "rating": 8.0,
-                          "summary": "Innovative and eco-friendly laundry service catering to busy professionals and students."
-                      },
-                      {
-                          "category": "Market",
-                          "rating": 7.0,
-                          "summary": "Target market is well-defined, but competitive landscape in Cebu City needs to be assessed."
-                      },
-                      {
-                          "category": "Organization",
-                          "rating": 7.5,
-                          "summary": "Strong logistics and laundromat partnership. Mobile app development experience is a plus."
-                      },
-                      {
-                          "category": "Finance",
-                          "rating": 7.5,
-                          "summary": "Initial capital is modest; pricing strategy seems feasible for the target market."
-                      }
-                  ],
-                  "keyFindings": "The mobile laundry service is a promising venture with a strong focus on eco-friendliness and convenience. Financial projections and market competition analysis are recommended for further validation."
-              },
-              "category": {
-                  "productService": {
-                      "rating": 8.0,
-                      "summary": "Mobile laundry service focusing on eco-friendly practices and convenience.",
-                      "verdict": "Highly Feasible",
-                      "strengths": ["Eco-friendly approach", "Convenience of pickup and delivery", "Partnership with established laundromat"],
-                      "risks": ["Dependency on mobile app functionality", "High operational logistics cost"],
-                      "suggestions": ["Develop a strong marketing plan", "Ensure high-quality app functionality"]
-                  },
-                  "market": {
-                      "rating": 7.0,
-                      "summary": "Defined target market with growth potential, but competitive analysis is lacking.",
-                      "verdict": "Moderately Feasible",
-                      "competitors": [
-                          {
-                              "name": "Local Laundromats",
-                              "shortDescription": "Traditional laundromats without pickup/delivery.",
-                              "link": "n/a"
-                          },
-                          {
-                              "name": "Existing Laundry Apps",
-                              "shortDescription": "Apps that might offer similar services.",
-                              "link": "n/a"
-                          }
-                      ],
-                      "suggestions": ["Conduct a detailed competitor analysis", "Identify unique selling propositions"]
-                  },
-                  "organizational": {
-                      "rating": 7.5,
-                      "summary": "Good foundation with relevant expertise and partnerships.",
-                      "verdict": "Moderately Feasible",
-                      "strengths": ["Logistics experience", "Laundromat partnership", "Mobile app development experience"],
-                      "risks": ["Dependence on a few key individuals", "Scaling challenges"],
-                      "suggestions": ["Expand the team with diverse skills", "Plan for scaling operations in advance"]
-                  },
-                  "financial": {
-                      "rating": 7.5,
-                      "summary": "Initial investment aligns with business requirements, but detailed financial projections are needed.",
-                      "startupCapital": 100000,
-                      "monthlyRevenueRange": [45000, 90000],
-                      "breakevenMonths": [12, 24],
-                      "suggestions": ["Prepare detailed financial projections", "Explore additional funding options for scaling"]
-                  }
-              }
-          } */
+ 
+  
+  
 
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e?.preventDefault) e.preventDefault();
     setResult({
       businessName: "",
       location: "",
@@ -235,7 +144,15 @@ function FeasibilityPage() {
         }
       }
     });
+    setError(false);
     setLoading(true);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < 90) return prev + 1;
+        else return prev;
+      });
+    }, 200);
 
     console.log(userData);
 
@@ -249,23 +166,46 @@ function FeasibilityPage() {
     })
 
     if (!response.ok) {
+      setError(true);
       throw new Error('Failed to get AI response');
     } 
+
+
 
     const data = await response.json();
     setResult(data.reply);
     console.log(data.reply);  
+
+    clearInterval(interval);
+      setProgress(100);
+
+      setTimeout(() => {
+        setLoading(false); // Hide bar after a short pause
+        setProgress(0);    // Reset progress if needed
+      }, 1000);
+
+    
+
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
+      clearInterval(interval);
+      setProgress(0);
+      setError(true);
     }
-  };  
+
+    
+      
+  };
+
+  
+  useEffect(() => {
+    handleSubmit();
+  }, []);
 
   return (
     <>
-      <div className="flex justify-center items-center h-[100vh] w-full">
-        <div className="flex flex-col bg-stroke-100 h-[47rem] w-[25rem] md:w-[40rem] rounded-3xl shadow-lg">
+      <div className="flex justify-center items-center h-[100vh] w-full  animate-fade-in">
+        { !loading ? (<div className="flex flex-col bg-stroke-100 h-[47rem] w-[25rem] md:w-[40rem] rounded-3xl shadow-lg">
           <div className=" flex items-center bg-primary-pink w-full h-[85px] rounded-t-3xl px-8">
             <div className="bg-secondary-pink w-[2.5rem] h-[2.5rem] rounded-lg"></div>
             <div className="flex flex-col justify-center w-full h-full px-4">
@@ -371,12 +311,26 @@ function FeasibilityPage() {
               <button className="bg-stroke-100 border-t-stroke-200 border-[2px] py-1 px-3 mr-2 rounded-xl shadow-s" onClick={handleSubmit}>Retry Analysis <FontAwesomeIcon icon={faRotateRight} className="text-primary-pink"></FontAwesomeIcon></button>
               <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={() => navigate('/home')}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
             </div>
-
-
-  
-
           </div>
-        </div>
+        </div>) : (
+          <div className="relative bg-primary-white h-auto w-[25rem] md:w-[40rem] rounded-3xl shadow-lg">
+            { !error ?
+            (<div><video className="relative" src="src\assets\two.mp4" autoPlay={true} loop={true} muted={true}></video>
+            <div className=" absolute bottom-[15%] left-[15%] font-istok font-bold text-3xl md:left-[30%] text-primary-pink"><p>Analyzing Feasibility</p></div>
+            <div className="h-[6rem] w-full rounded-b-3xl flex justify-center items-center">
+              <div className="h-[20px] w-[90%] bg-stroke-200 rounded-3xl">
+                <div className="h-[20px] w-auto bg-primary-pink transition-all duration-200 rounded-3xl"
+              style={{ width: `${progress}%` }}></div>
+              </div>
+            </div></div>) : (<div className="animate-shake"><video className="relative" src="src\assets\error.mp4" autoPlay={true} loop={true} muted={true}></video>
+            <div className=" absolute bottom-[20%] left-[15%] font-istok font-bold text-3xl md:left-[23%] text-primary-pink"><p>There seems a problem...</p></div>
+            <div className="h-[6rem] w-full rounded-b-3xl flex justify-center items-center">
+              <button className="px-6 py-2 bg-primary-pink rounded-xl font-istok text-primary-white font-medium text-xl mx-2 mb-12" onClick={() => navigate('/onboarding', {state: {userData: userData}})}>Go Back</button>
+              <button className="px-6 py-2 bg-primary-pink rounded-xl font-istok text-primary-white font-medium text-xl mx-2 mb-12" onClick={handleSubmit}>Retry</button>
+            </div></div>)}
+          </div>
+        )}
+        
       </div>
     </>
   );
