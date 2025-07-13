@@ -1,39 +1,24 @@
 import React from 'react';
-import { LinearProgress, Box, Typography } from '@mui/material';
-
+import { LinearProgress, Box } from '@mui/material';
 
 const StepProgressBar = ({ currentStep }) => {
     const stepProgressMap = {
-        1: 10,
-        2: 30,
-        3: 50,
-        4: 75,
+        1: 20,
+        2: 40,
+        3: 60,
+        4: 80,
         5: 100,
     };
 
     const progress = stepProgressMap[currentStep] || 100;
 
     return (
-        <Box
-            sx={{
-                width: '100%',
-                maxWidth: '640px',
-                mt: { xs: 6, sm: 10 },
-                mb: 2,
-                px: { xs: 2, sm: 0 },
-            }}
-        >
-            <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ textAlign: 'center', mb: 1 }}
-            >
-            </Typography>
+        <div className='w-[640px]'>
             <LinearProgress
                 variant="determinate"
                 value={progress}
                 sx={{
-                    height: 10,
+                    height: 6,
                     borderRadius: 5,
                     backgroundColor: '#e0e0e0',
                     '& .MuiLinearProgress-bar': {
@@ -43,7 +28,7 @@ const StepProgressBar = ({ currentStep }) => {
                     },
                 }}
             />
-        </Box>
+        </div>
     );
 };
 

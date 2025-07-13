@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import HomePage from './pages/HomePage';
-import GuidesPage from './pages/GuidesPage';
-import TrainingsPage from './pages/TrainingsPage';
-import LoansPage from './pages/LoansPage';
-import CommunityPage from './pages/CommunityPage';
-import FeasibilityPage from './pages/feasibility_page/page';
-import Onboarding from './Onboarding';
+import HomePage from './pages/userPages/HomePage';
+import GuidesPage from './pages/userPages/GuidesPage';
+import TrainingsPage from './pages/userPages/TrainingsPage';
+import LoansPage from './pages/userPages/LoansPage';
+import CommunityPage from './pages/userPages/CommunityPage';
+import FeasibilityPage from './pages/feasibility_page/FeasibilityPage';
+import Onboarding from './pages/Onboarding';
 
 
 

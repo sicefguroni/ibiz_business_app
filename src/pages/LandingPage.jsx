@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/userPages/Navbar";
 import LandingImage from "../assets/landing/landing-image.png";
 import Dot from "../assets/landing/dot.svg?react";
 import PlanIcon from "../assets/landing/plan-icon.svg?react";
