@@ -15,6 +15,7 @@ import TableComp from "../../components/Table";
 import FinanceDetail from "../../components/FinanceDetail";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import jsPDF from "jspdf";
 
 
 function createData(competitor, description, link) {
@@ -262,6 +263,77 @@ function FeasibilityPage() {
     }
   };  
 
+  const generateBusinessPlanPDF = async () => {
+  try {
+    // Call the business plan API
+    const response = await fetch('http://localhost:3000/business-plan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userData })
+    });
+
+    if (!response.ok) throw new Error('Failed to get business plan');
+
+    const data = await response.json();
+    const plan = data.reply;
+
+    // Create PDF
+    const doc = new jsPDF();
+    let y = 10;
+
+    // Helper to add section title
+    const addSection = (title) => {
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text(title, 10, y);
+      y += 8;
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "normal");
+    };
+
+    // Helper to add text
+    const addText = (label, value) => {
+      doc.text(`${label}: ${value}`, 10, y);
+      y += 7;
+    };
+
+    // Executive Summary
+    addSection("01 - Executive Summary");
+    addText("Business Name", plan.executiveSummary.businessName);
+    addText("Type", plan.executiveSummary.businessType);
+    addText("Location", plan.executiveSummary.location);
+    addText("Founded", plan.executiveSummary.founded);
+    addText("Summary", plan.executiveSummary.summary);
+
+    // Business Description
+    addSection("02 - Business Description");
+    addText("Mission Statement", plan.businessDescription.missionStatement);
+    addText("Vision Statement", plan.businessDescription.visionStatement);
+    addText("Company Overview", plan.businessDescription.companyOverview);
+    addText("Business Structure", plan.businessDescription.businessStructure);
+    addText("Products & Services", plan.businessDescription.productsAndServices.join(", "));
+    addText("Target Market", plan.businessDescription.targetMarket);
+    addText("Competitive Advantage", plan.businessDescription.competitiveAdvantage);
+
+    // Market Analysis
+    addSection("03 - Market Analysis");
+    addText("Industry Overview", plan.marketAnalysis.industryOverview);
+    addText("Target Market Analysis", plan.marketAnalysis.targetMarketAnalysis);
+    addText("Market Segment 1", `${plan.marketAnalysis.marketSegment1.name}: ${plan.marketAnalysis.marketSegment1.description}`);
+    addText("Market Segment 2", `${plan.marketAnalysis.marketSegment2.name}: ${plan.marketAnalysis.marketSegment2.description}`);
+    addText("Market Trends", plan.marketAnalysis.marketTrends.join(", "));
+    addText("Market Size & Growth Potential", plan.marketAnalysis.marketSizeAndGrowthPotential);
+
+    // ...repeat for other sections...
+
+    // Save/download PDF
+    doc.save("Business_Plan.pdf");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to generate business plan PDF.");
+  }
+};
+
   return (
     <>
       <div className="flex justify-center items-center h-[100vh] w-full">
@@ -369,12 +441,14 @@ function FeasibilityPage() {
 
             <div className="border-t-stroke-200 border-t-[2px] p-4 mx-2 font-istok flex justify-end">
               <button className="bg-stroke-100 border-t-stroke-200 border-[2px] py-1 px-3 mr-2 rounded-xl shadow-s" onClick={handleSubmit}>Retry Analysis <FontAwesomeIcon icon={faRotateRight} className="text-primary-pink"></FontAwesomeIcon></button>
-              <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={() => navigate('/home')}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
+              <button
+                className={`py-1 px-3 rounded-xl shadow-lg ${result?.summary?.overallRating ? "bg-primary-pink text-primary-white" : "bg-primary-pink/50 text-primary-white/70 cursor-not-allowed"}`}
+                disabled={!result?.summary?.overallRating}
+                onClick={generateBusinessPlanPDF}
+              >
+                Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className={result?.summary?.overallRating ? "text-primary-white" : "text-primary-white/70"}></FontAwesomeIcon>
+              </button>
             </div>
-
-
-  
-
           </div>
         </div>
       </div>
