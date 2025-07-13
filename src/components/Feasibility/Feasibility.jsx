@@ -12,12 +12,10 @@ import Feedback from "../../components/Feasibility//Feedback";
 import SubScore from "../../components/Feasibility//SubScore";
 import TableComp from "../../components/Feasibility//Table";
 import FinanceDetail from "../../components/Feasibility/FinanceDetail";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
-function Feasibility({result, handleSubmit, ForDisplay}) {
-    const navigate = useNavigate();
+function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
     const [activeTab, setActiveTab] = useState("overview");
 
     return (
@@ -126,7 +124,7 @@ function Feasibility({result, handleSubmit, ForDisplay}) {
 
             {ForDisplay ?<div></div> : <div className="border-t-stroke-200 border-t-[2px] p-4 mx-2 font-istok flex justify-end">
               <button className="bg-stroke-100 border-t-stroke-200 border-[2px] py-1 px-3 mr-2 rounded-xl shadow-s" onClick={handleSubmit}>Retry Analysis <FontAwesomeIcon icon={faRotateRight} className="text-primary-pink"></FontAwesomeIcon></button>
-              <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={() => navigate('/home', {state: {feasibilityReport: result}})}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
+              <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={genBusPdf}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
             </div>}
 
             
