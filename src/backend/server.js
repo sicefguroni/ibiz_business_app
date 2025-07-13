@@ -32,8 +32,7 @@ app.post('/chat', async (req, res) => {
                         {
                             "businessName": "string",
                             "location": "string",
-                            "date": "YYYY-MM-DD",
-
+                            "businessDescription": "string",
                             "summary": {
                                 "overallRating": number,
                                 "verdict": "string",
@@ -104,10 +103,13 @@ app.post('/chat', async (req, res) => {
                             },
                         }
 
-                        Ratings should be only x.xx/10 .
-                        Verdicts are ["Less Feasible", "Moderately Feasible", "Highly Feasible"].
-                        When dealing with large numbers, format with comma when necessary.
-                        For key findings, strenghts, risk, and summaries under the category, be very detailed.
+                        RULES:
+
+                        1. Ratings should be only x.xx/10 .
+                        2. Verdicts are ["Less Feasible", "Moderately Feasible", "Highly Feasible"].
+                        3. When dealing with large numbers, format with comma when necessary.
+                        4. For key findings, strengths, and risks, and suggestions, they should have at least 3 bullet points and each bullet should be at least 70 words.
+                        5. businessDescription should be 100-150 words.
 
                         Do NOT include any text outside the JSON. Here is the user message:
                         "${message}"`;
