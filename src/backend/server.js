@@ -34,10 +34,6 @@ app.post('/business-plan', async (req, res) => {
 
     {
       "executiveSummary": {
-        "businessName": "string",
-        "businessType": "string",
-        "location": "string",
-        "founded": "YYYY-MM-DD",
         "summary": "string"
       },
       "businessDescription": {
@@ -52,8 +48,6 @@ app.post('/business-plan', async (req, res) => {
       "marketAnalysis": {
         "industryOverview": "string",
         "targetMarketAnalysis": "string",
-        "marketSegment1": {"name": "string", "description": "string"},
-        "marketSegment2": {"name": "string", "description": "string"},
         "marketTrends": ["string"],
         "marketSizeAndGrowthPotential": "string"
       },
@@ -64,19 +58,6 @@ app.post('/business-plan', async (req, res) => {
         "promotionalActivities": ["string"],
         "salesForecast": {"year1": number, "year2": number, "year3": number}
       },
-      "organizationalStructureAndManagement": {
-        "ownershipAndLegalStructure": "string",
-        "keyPersonnel": [{"name": "string", "role": "string", "background": "string"}],
-        "rolesAndResponsibilities": {"CEO": "string", "CTO": "string", "COO": "string"},
-        "advisoryBoardAndConsultants": ["string"]
-      },
-      "productDevelopmentAndOperations": {
-        "productDevelopmentProcess": "string",
-        "supplyChainManagement": "string",
-        "productionServiceDeliveryProcess": "string",
-        "qualityControl": "string",
-        "intellectualProperty": "string"
-      },
       "financialProjections": {
         "salesForecast": {"year1": number, "year2": number, "year3": number},
         "projectedExpenses": {"year1": number, "year2": number, "year3": number},
@@ -85,25 +66,11 @@ app.post('/business-plan', async (req, res) => {
         "breakEvenAnalysis": {"breakEvenMonth": number, "breakEvenRevenue": number},
         "keyFinancialRatios": {"grossMargin": "string", "netMargin": "string", "currentRatio": "string"}
       },
-      "fundingRequest": {
-        "fundingNeedsAndPurpose": "string",
-        "repaymentPlan": "string",
-        "proposedFundingSources": ["string"]
-      },
       "implementationPlan": {
-        "milestonesAndTimelines": [{"milestone": "string", "timeline": "string"}],
         "resourceAllocation": {"development": "string", "marketing": "string", "operations": "string"},
         "riskAssessmentAndMitigation": [{"risk": "string", "mitigation": "string"}],
         "exitStrategy": "string"
       },
-      "appendix": {
-        "supportingDocuments": ["string"],
-        "marketResearchData": ["string"],
-        "legalDocuments": ["string"],
-        "resumesOfKeyPersonnel": ["string"],
-        "financialStatements": ["string"],
-        "otherRelevantInformation": ["string"]
-      }
     }
 
     Fill each section with realistic data based on the user message. Keys must closely follow the section titles. Do NOT include any text outside the JSON. Here is the user message:
