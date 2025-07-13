@@ -384,6 +384,7 @@ function FeasibilityPage() {
         setPdfLoading(false);
         setPdfProgress(0);
       }, 1000);
+      navigate('/home', {state: {feasibilityReport: result}});
     } catch (err) {
       clearInterval(interval);
       setPdfLoading(false);
@@ -399,7 +400,7 @@ function FeasibilityPage() {
         { pdfLoading ? (
           <div className="relative bg-primary-white h-auto w-[25rem] md:w-[40rem] rounded-3xl shadow-lg">
             <video className="relative" src="src\assets\two.mp4" autoPlay={true} loop={true} muted={true}></video>
-            <div className=" absolute bottom-[15%] left-[15%] font-istok font-bold text-3xl md:left-[30%] text-primary-pink"><p>Generating Business Plan</p></div>
+            <div className=" absolute bottom-[15%] left-[12%] font-istok font-bold text-3xl md:left-[24%] text-primary-pink"><p>Generating Business Plan</p></div>
             <div className="h-[6rem] w-full rounded-b-3xl flex justify-center items-center">
               <div className="h-[20px] w-[90%] bg-stroke-200 rounded-3xl">
                 <div className="h-[20px] w-auto bg-primary-pink transition-all duration-200 rounded-3xl"
