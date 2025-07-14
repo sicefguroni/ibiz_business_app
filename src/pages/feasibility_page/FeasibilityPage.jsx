@@ -375,8 +375,9 @@ function FeasibilityPage() {
       doc.text("Exit Strategy", 15, y);
       y = printWrappedText(plan.implementationPlan?.exitStrategy || "", 15, y + 6);
 
-      // Save/download PDF
-      doc.save("Business_Plan.pdf");
+      // Instead of saving/downloading, create a Blob and pass its URL to /home
+      const pdfBlob = doc.output("blob");
+      const pdfUrl = URL.createObjectURL(pdfBlob);
 
       clearInterval(interval);
       setPdfProgress(100);
@@ -384,7 +385,7 @@ function FeasibilityPage() {
         setPdfLoading(false);
         setPdfProgress(0);
       }, 1000);
-      navigate('/home', {state: {feasibilityReport: result}});
+      navigate('/home', {state: {feasibilityReport: result, businessPlanPdfUrl: pdfUrl}});
     } catch (err) {
       clearInterval(interval);
       setPdfLoading(false);

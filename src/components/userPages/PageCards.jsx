@@ -6,9 +6,22 @@ export const BusinessCard = ({ image, title, location, description, feasibilityR
     const [isOpen, setIsOpen] = useState(false);
     const [selectedTab, setSelectedTab] = useState('feasibility');
 
+    // Download handler for PDF Blob URL
+    const handleDownloadPdf = () => {
+        if (selectedTab === 'businessPlan' && PDF) {
+            const link = document.createElement('a');
+            link.href = PDF;
+            link.download = 'Business_Plan.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        // else: could add feasibility PDF download logic here in the future
+    };
+
     const BusinessModal = () => {
         return (
-            <div onClick={() => setIsOpen(false)} class='h-full w-screen flex items-center justify-center bg-black/50 fixed inset-0 z-50'>
+            <div onClick={() => setIsOpen(false)} className='h-full w-screen flex items-center justify-center bg-black/50 fixed inset-0 z-50'>
                 <div onClick={(e) => e.stopPropagation()} className='flex bg-primary-white rounded-xl w-[900px] h-[600px] shadow-xl p-4 overflow-hidden'>
                     <div className='flex flex-col justify-between w-2/5 h-full '>
                         <div className='mr-8'>
@@ -24,7 +37,12 @@ export const BusinessCard = ({ image, title, location, description, feasibilityR
                             <button onClick={() => setIsOpen(false)} className='bg-primary-white hover:bg-stroke-200/80 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md px-4 py-2 border border-primary-black/50 flex-shrink-0'>
                                 Close
                             </button>
-                            <button onClick={() => setIsOpen(false)} className='flex items-center gap-2 bg-secondary-brown hover:bg-secondary-brown/70 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md border border-primary-black/50 px-8 py-2 flex-shrink-0'>
+                            <button
+                                onClick={handleDownloadPdf}
+                                className='flex items-center gap-2 bg-secondary-brown hover:bg-secondary-brown/70 transition-all duration-300 text-primary-black font-[Istok Web] font-medium text-[14px] rounded-md border border-primary-black/50 px-8 py-2 flex-shrink-0'
+                                disabled={selectedTab !== 'businessPlan' || !PDF}
+                                style={selectedTab !== 'businessPlan' || !PDF ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
+                            >
                                 Download PDF<DownloadIcon className='w-4 h-4' />
                             </button>
                         </div>
@@ -39,7 +57,7 @@ export const BusinessCard = ({ image, title, location, description, feasibilityR
                             </button>
                         </div>
                         <div className='flex-1'>
-                            {selectedTab === 'feasibility' ? feasibilityReport : <iframe src={PDF} className='w-full h-full' />}
+                            {selectedTab === 'feasibility' ? feasibilityReport : <iframe src={PDF} className='w-full h-full' title="Business Plan PDF" />}
                         </div>
                     </div>
                 </div>
