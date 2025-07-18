@@ -10,7 +10,7 @@ import Step6Summary from '../components/onboarding/Summarypage';
 import LoadingAnimation from '../components/onboarding/Analyzinganimation';
 
 import StepLayout from '../components/StepLayout';
-import StepProgressBar from '../components/ProgressBar';
+import StepProgressBar from '../components/progressbar';
 import Navbar from '../components/userPages/Navbar';
 
 const Onboarding = () => {
