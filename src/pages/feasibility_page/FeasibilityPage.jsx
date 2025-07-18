@@ -6,7 +6,6 @@ import Feasibility from "../../components/Feasibility/Feasibility";
 import jsPDF from "jspdf";
 
 
-
 function FeasibilityPage() {
   const location = useLocation();
   const { userData } = location.state || {}; 
