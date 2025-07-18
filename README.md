@@ -1,12 +1,23 @@
-# React + Vite
+✨ Welcome to iBiz
+Your smart companion for launching a business the right way.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+At iBiz, we believe great businesses begin with thoughtful planning — and we're here to make that process simple, empowering, and accessible for women entrepreneurs like you.
 
-Currently, two official plugins are available:
+💡 Got a Business Idea?
+We’ll help you refine it, analyze it, and turn it into a reality.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ Describe your idea in plain terms
+✅ Instantly get a feasibility report — covering product, market, organization, and finances
+✅ Generate a professional business plan with just one click
 
-## Expanding the ESLint configuration
+📚 Need Help Along the Way?
+Our Startup Guides are packed with handpicked:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅Verified trainings
+✅Legal checklists
+✅Government funding opportunities
+
+All curated from trusted national agencies and NGOs.
+
+👩‍💼 You’re Not Alone
+Build your network in the iBiz Community, where like-minded women entrepreneurs share their insights, resources, and stories. Grow with others who get you.
