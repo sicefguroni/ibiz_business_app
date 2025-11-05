@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tailwind:init": "tailwindcss init -p"
+    "tailwind:init": "tailwindcss init -p",
+    "server": "node src/backend/server.js",
+    "dev:server": "nodemon src/backend/server"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
