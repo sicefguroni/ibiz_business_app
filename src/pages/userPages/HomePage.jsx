@@ -20,10 +20,10 @@ const HomePage = () => {
                 <PageBody title="Your Business Plans" home={true} grid={true}>
                     <BusinessCard
                         image={RestaurantLogo}
-                        feasibilityReport={<Feasibility ForDisplay={true} result={{businessName: "Restaurant", location: "123 Main St, Anytown, USA", businessDescription: "This is a description of the business"}}/>}
+                        feasibilityReport={<Feasibility ForDisplay={true} result={{businessName: "Restaurant", location: "Cebu City, Philippines", businessDescription: "A restaurant that serves Filipino cuisine"}}/>}
                         title="Restaurant"
-                        location="123 Main St, Anytown, USA"
-                        description="This is a description of the business"
+                        location="Cebu City, Philippines"
+                        description="A restaurant that serves Filipino cuisine"
                         PDF="/Sample.pdf"
                     />
                 </PageBody>
