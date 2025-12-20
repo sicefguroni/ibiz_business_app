@@ -36,7 +36,7 @@ const StepLayout = ({ step, totalSteps, children, onNext, onAnalyze, onEdit, onB
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col max-w-screen'>
             <div className='flex flex-col'>
                 <LayoutTitle title={title} />
                 {children}
@@ -54,10 +54,10 @@ const StepLayout = ({ step, totalSteps, children, onNext, onAnalyze, onEdit, onB
                         onboardingButton('Next', <ArrowForwardRoundedIcon sx={{ fontSize: 18 }} />, onNext)
                     )
                 ) : (
-                    <>
+                    <div className='flex items-center gap-4 my-8'>
                         {onboardingButton('Edit Info', <EditIcon className='text-primary-black font-[18px]' />, onEdit, true)}
                         {onboardingButton('Analyze Feasibility', <BarChartIcon />, onAnalyze)}
-                    </>
+                    </div>
                 )}
             </div>
         </div>

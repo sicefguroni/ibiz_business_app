@@ -20,8 +20,8 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
     const [activeTab, setActiveTab] = useState("overview");
 
     return (
-        <>
-        <div className={ForDisplay ?`flex flex-col bg-stroke-100 h-[30rem] w-full shadow-lg` : `flex flex-col bg-stroke-100 h-[47rem] w-[25rem] md:w-[40rem] rounded-3xl shadow-lg`}>
+        <div className={`${ForDisplay ? "" : "w-screen h-screen flex justify-center items-center p-8 landing-bg"}`}>
+        <div className={ForDisplay ?`flex flex-col bg-stroke-100 h-[30rem] w-full shadow-lg` : `flex flex-col bg-stroke-100 h-[40rem] w-[25rem] md:w-[40rem] rounded-3xl shadow-lg `}>
           {!ForDisplay ? <div className=" flex items-center bg-primary-pink w-full h-[85px] rounded-t-3xl px-8">
             <div className="bg-secondary-pink w-[2.5rem] h-[2.5rem] rounded-lg"></div>
             <div className="flex flex-col justify-center w-full h-full px-4">
@@ -52,16 +52,16 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
             {/* overview tab */}
             {activeTab === "overview" &&  
               <div className="flex-1 overflow-y-auto overflow-x-hidden py-2 px-4 flex flex-col">
-                <Score title={"Overall Feasibility Score"} score={result?.summary.overallRating || "Loading..."} description={result?.summary.verdict || "Loading..."}></Score>
+                <Score title={"Overall Feasibility Score"} score={result?.summary?.overallRating || "Loading..."} description={result?.summary?.verdict || "Loading..."}></Score>
                 <div className="flex flex-wrap gap-3">
-                  <SubScore score={result?.summary.overview[0].rating || "Loading..."} category={"Product/Service"} summary={result?.summary.overview[0].summary || "Loading..."} bgSecondaryColor={"bg-secondary-green"} bdPrimaryColor={"border-primary-green"} txPrimaryColor={"text-primary-green"}></SubScore>
-                  <SubScore score={result?.summary.overview[1].rating || "Loading..."}  category={"Market"} summary={result?.summary.overview[1].summary || "Loading..."}   bgSecondaryColor={"bg-secondary-orange"} bdPrimaryColor={"border-primary-orange"} txPrimaryColor={"text-primary-orange"}></SubScore>
+                  <SubScore score={result?.summary?.overview?.[0]?.rating || "Loading..."} category={"Product/Service"} summary={result?.summary?.overview?.[0]?.summary || "Loading..."} bgSecondaryColor={"bg-secondary-green"} bdPrimaryColor={"border-primary-green"} txPrimaryColor={"text-primary-green"}></SubScore>
+                  <SubScore score={result?.summary?.overview?.[1]?.rating || "Loading..."}  category={"Market"} summary={result?.summary?.overview?.[1]?.summary || "Loading..."}   bgSecondaryColor={"bg-secondary-orange"} bdPrimaryColor={"border-primary-orange"} txPrimaryColor={"text-primary-orange"}></SubScore>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  <SubScore score={result?.summary.overview[2].rating || "Loading..."}  category={"Organization"} summary={result?.summary.overview[2].summary || "Loading..."}   bgSecondaryColor={"bg-secondary-pink"} bdPrimaryColor={"border-primary-pink"} txPrimaryColor={"text-primary-pink"}></SubScore>
-                  <SubScore score={result?.summary.overview[3].rating || "Loading..."}  category={"Finance"} summary={result?.summary.overview[3].summary || "Loading..."}   bgSecondaryColor={"bg-secondary-blue"} bdPrimaryColor={"border-primary-blue"} txPrimaryColor={"text-primary-blue"}></SubScore>
+                  <SubScore score={result?.summary?.overview?.[2]?.rating || "Loading..."}  category={"Organization"} summary={result?.summary?.overview?.[2]?.summary || "Loading..."}   bgSecondaryColor={"bg-secondary-pink"} bdPrimaryColor={"border-primary-pink"} txPrimaryColor={"text-primary-pink"}></SubScore>
+                  <SubScore score={result?.summary?.overview?.[3]?.rating || "Loading..."}  category={"Finance"} summary={result?.summary?.overview?.[3]?.summary || "Loading..."}   bgSecondaryColor={"bg-secondary-blue"} bdPrimaryColor={"border-primary-blue"} txPrimaryColor={"text-primary-blue"}></SubScore>
                 </div>
-                <Feedback title={"Key Findings"} icon={faLightbulb} results={result?.summary.keyFindings || ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
+                <Feedback title={"Key Findings"} icon={faLightbulb} results={result?.summary?.keyFindings || ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
               </div> 
             } 
              
@@ -69,13 +69,13 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
             {activeTab === "product" && 
               <div className="flex-1 overflow-y-auto overflow-x-hidden py-2 px-4 flex flex-col">
                 <div className="flex flex-wrap gap-2">
-                    <Score title={"Category Feasibility Score"} score={result?.category.productService.rating || "Loading..."} description={result?.category.productService.verdict || "Loading..."}></Score>
-                    <Feedback title={"Summary"} icon={faLightbulb} results={[result?.category.productService.summary] || ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
+                    <Score title={"Category Feasibility Score"} score={result?.category?.productService?.rating || "Loading..."} description={result?.category?.productService?.verdict || "Loading..."}></Score>
+                    <Feedback title={"Summary"} icon={faLightbulb} results={result?.category?.productService?.summary ? [result.category.productService.summary] : ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
                 </div>
                 <div className="size-auto">
-                  <Feedback title={"Strengths"} icon={faDumbbell} results={result?.category.productService.strengths || ["Loading..."]} bgPrimaryColor={"bg-primary-blue"} bgSecondaryColor={"bg-secondary-blue"} txIconColor={"text-secondary-blue"} txPrimaryColor={"text-primary-blue"}></Feedback>
-                  <Feedback title={"Risk"} icon={faTriangleExclamation} results={result?.category.productService.risks || ["Loading..."]}  bgPrimaryColor={"bg-primary-red"} bgSecondaryColor={"bg-secondary-red"} txIconColor={"text-secondary-red"} txPrimaryColor={"text-primary-red"}></Feedback>
-                  <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category.productService.suggestions || ["Loading..."]}  bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
+                  <Feedback title={"Strengths"} icon={faDumbbell} results={result?.category?.productService?.strengths || ["Loading..."]} bgPrimaryColor={"bg-primary-blue"} bgSecondaryColor={"bg-secondary-blue"} txIconColor={"text-secondary-blue"} txPrimaryColor={"text-primary-blue"}></Feedback>
+                  <Feedback title={"Risk"} icon={faTriangleExclamation} results={result?.category?.productService?.risks || ["Loading..."]}  bgPrimaryColor={"bg-primary-red"} bgSecondaryColor={"bg-secondary-red"} txIconColor={"text-secondary-red"} txPrimaryColor={"text-primary-red"}></Feedback>
+                  <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category?.productService?.suggestions || ["Loading..."]}  bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
                 </div>
               </div>
             }
@@ -84,11 +84,11 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
             {activeTab === "market" && 
               <div className="flex-1 overflow-y-auto overflow-x-hidden py-2 px-4 flex flex-col">
                 <div className="flex flex-wrap gap-2">
-                    <Score title={"Category Feasibility Score"} score={result?.category.market.rating || "Loading..."} description={result?.category.market.verdict || "Loading..."}></Score>
-                    <Feedback title={"Summary"} icon={faLightbulb} results={[result?.category.market.summary] || ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
+                    <Score title={"Category Feasibility Score"} score={result?.category?.market?.rating || "Loading..."} description={result?.category?.market?.verdict || "Loading..."}></Score>
+                    <Feedback title={"Summary"} icon={faLightbulb} results={result?.category?.market?.summary ? [result.category.market.summary] : ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
                 </div>
-                <TableComp rows={result?.category.market.competitors || ["Loading..."]}></TableComp>
-                <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category.market.suggestions || ["Loading..."]} bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
+                <TableComp rows={result?.category?.market?.competitors || ["Loading..."]}></TableComp>
+                <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category?.market?.suggestions || ["Loading..."]} bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
               </div>
             }
 
@@ -96,13 +96,13 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
             {activeTab === "organization" && 
               <div className="flex-1 overflow-y-auto overflow-x-hidden py-2 px-4 flex flex-col">
                 <div className="flex flex-wrap gap-2">
-                    <Score title={"Category Feasibility Score"} score={result?.category.organizational.rating || "Loading..."} description={result?.category.organizational.verdict || "Loading..."}></Score>
-                    <Feedback title={"Summary"} icon={faLightbulb} results={[result?.category.organizational.summary] || ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
+                    <Score title={"Category Feasibility Score"} score={result?.category?.organizational?.rating || "Loading..."} description={result?.category?.organizational?.verdict || "Loading..."}></Score>
+                    <Feedback title={"Summary"} icon={faLightbulb} results={result?.category?.organizational?.summary ? [result.category.organizational.summary] : ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
                 </div>
                 <div className="size-auto">
-                  <Feedback title={"Strengths"} icon={faDumbbell} results={result?.category.organizational.strengths || ["Loading..."]} bgPrimaryColor={"bg-primary-blue"} bgSecondaryColor={"bg-secondary-blue"} txIconColor={"text-secondary-blue"} txPrimaryColor={"text-primary-blue"}></Feedback>
-                  <Feedback title={"Risk"} icon={faTriangleExclamation} results={result?.category.organizational.risks || ["Loading..."]}  bgPrimaryColor={"bg-primary-red"} bgSecondaryColor={"bg-secondary-red"} txIconColor={"text-secondary-red"} txPrimaryColor={"text-primary-red"}></Feedback>
-                  <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category.organizational.suggestions || ["Loading..."]}  bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
+                  <Feedback title={"Strengths"} icon={faDumbbell} results={result?.category?.organizational?.strengths || ["Loading..."]} bgPrimaryColor={"bg-primary-blue"} bgSecondaryColor={"bg-secondary-blue"} txIconColor={"text-secondary-blue"} txPrimaryColor={"text-primary-blue"}></Feedback>
+                  <Feedback title={"Risk"} icon={faTriangleExclamation} results={result?.category?.organizational?.risks || ["Loading..."]}  bgPrimaryColor={"bg-primary-red"} bgSecondaryColor={"bg-secondary-red"} txIconColor={"text-secondary-red"} txPrimaryColor={"text-primary-red"}></Feedback>
+                  <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category?.organizational?.suggestions || ["Loading..."]}  bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
                 </div>
               </div>
             }
@@ -111,14 +111,14 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
             {activeTab === "finance" && 
               <div className="flex-1 overflow-y-auto overflow-x-hidden py-2 px-4 flex flex-col">
                 <div className="flex flex-wrap gap-2">
-                    <Score title={"Category Feasibility Score"} score={result?.category.financial.rating || "Loading..."} description={result?.category.financial.verdict || "Loading..."}></Score>
-                    <Feedback title={"Summary"} icon={faLightbulb} results={[result?.category.financial.summary] || ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
+                    <Score title={"Category Feasibility Score"} score={result?.category?.financial?.rating || "Loading..."} description={result?.category?.financial?.verdict || "Loading..."}></Score>
+                    <Feedback title={"Summary"} icon={faLightbulb} results={result?.category?.financial?.summary ? [result.category.financial.summary] : ["Loading..."]} bgPrimaryColor={"bg-primary-green"} bgSecondaryColor={"bg-secondary-green"} txIconColor={"text-secondary-green"} txPrimaryColor={"text-primary-green"}></Feedback>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  <FinanceDetail title={"Startup Capital"} value={result?.category?.financial ? `${result?.category.financial.startupCapital}` : "Loading..."} icon={faMoneyBill} bgSecondaryColor={"bg-secondary-red"} bdPrimaryColor={"border-primary-red"} txPrimaryColor={"text-primary-red"}></FinanceDetail>
-                  <FinanceDetail title={"Monthly Revenue"} value={result?.category?.financial ? `${result?.category.financial.monthlyRevenueRange[0]} - ${result?.category.financial.monthlyRevenueRange[1]}` : "Loading..."} icon={faChartSimple} bgSecondaryColor={"bg-secondary-orange"} bdPrimaryColor={"border-primary-orange"} txPrimaryColor={"text-primary-orange"}></FinanceDetail>
-                  <FinanceDetail title={"Breakeven"} value={result?.category?.financial ? `${result?.category.financial.breakevenMonths[0]} - ${result?.category.financial.breakevenMonths[1]} months` : "Loading..."} icon={faScaleBalanced} bgSecondaryColor={"bg-secondary-blue"} bdPrimaryColor={"border-primary-blue"} txPrimaryColor={"text-primary-blue"}></FinanceDetail>
-                  <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category.financial.suggestions || ["Loading..."]} bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
+                  <FinanceDetail title={"Startup Capital"} value={result?.category?.financial?.startupCapital || "Loading..."} icon={faMoneyBill} bgSecondaryColor={"bg-secondary-red"} bdPrimaryColor={"border-primary-red"} txPrimaryColor={"text-primary-red"}></FinanceDetail>
+                  <FinanceDetail title={"Monthly Revenue"} value={result?.category?.financial?.monthlyRevenueRange ? `${result.category.financial.monthlyRevenueRange[0]} - ${result.category.financial.monthlyRevenueRange[1]}` : "Loading..."} icon={faChartSimple} bgSecondaryColor={"bg-secondary-orange"} bdPrimaryColor={"border-primary-orange"} txPrimaryColor={"text-primary-orange"}></FinanceDetail>
+                  <FinanceDetail title={"Breakeven"} value={result?.category?.financial?.breakevenMonths ? `${result.category.financial.breakevenMonths[0]} - ${result.category.financial.breakevenMonths[1]} months` : "Loading..."} icon={faScaleBalanced} bgSecondaryColor={"bg-secondary-blue"} bdPrimaryColor={"border-primary-blue"} txPrimaryColor={"text-primary-blue"}></FinanceDetail>
+                  <Feedback title={"Suggestions"} icon={faPenNib} results={result?.category?.financial?.suggestions || ["Loading..."]} bgPrimaryColor={"bg-primary-yellow"} bgSecondaryColor={"bg-secondary-yellow"} txIconColor={"text-secondary-yellow"} txPrimaryColor={"text-primary-yellow"}></Feedback>
                 </div>
               </div>
             }
@@ -127,11 +127,9 @@ function Feasibility({result, handleSubmit, ForDisplay, genBusPdf}) {
               <button className="bg-stroke-100 border-t-stroke-200 border-[2px] py-1 px-3 mr-2 rounded-xl shadow-s" onClick={handleSubmit}>Retry Analysis <FontAwesomeIcon icon={faRotateRight} className="text-primary-pink"></FontAwesomeIcon></button>
               <button className="bg-primary-pink text-primary-white py-1 px-3 rounded-xl shadow-lg" onClick={genBusPdf}>Generate Business Plan <FontAwesomeIcon icon={faCheckToSlot} className="text-primary-white"></FontAwesomeIcon></button>
             </div>}
-
-            
           </div>
         </div>
-        </>
+        </div>
     )
 }
 

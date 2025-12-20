@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import BusinessIdeaStep from '../components/onboarding/BusinessIdeaStep';
@@ -31,7 +31,7 @@ const Onboarding = () => {
         pricingDescription: '',
         aiAdditionalInfo: '',
     });
-    const [submissionStatus, setSubmissionStatus] = useState('idle');
+    const [submissionStatus] = useState('idle');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,11 +52,27 @@ const Onboarding = () => {
 
     const nextStep = () => setStep((prev) => prev + 1);
     const prevStep = () => setStep((prev) => Math.max(1, prev - 1));
-// hellop
-    const handleSubmit = async () => {
-        const data = JSON.stringify(formData);
 
-        navigate('/feasibility', { state: { userData: data } }); 
+    const handleSubmit = () => {
+        // // Dummy data matching the form structure
+        // const dummyData = {
+        //     businessIdea: 'A mobile laundry pickup and delivery service in Cebu City',
+        //     businessLocation: 'Cebu City',
+        //     beneficiaries: ['Professionals', 'Students'],
+        //     customBeneficiaries: '',
+        //     describeCustomers: 'Busy professionals and working students living in apartments or condos',
+        //     businessProvides: ['Laundry Service', 'Pickup & Delivery'],
+        //     customBusinessProvides: '',
+        //     howToDeliver: 'Via mobile app booking with 24-48 hour turnaround',
+        //     pricingModel: ['Per Load'],
+        //     customPricing: '',
+        //     pricingDescription: '₱150 per load with optional express service for extra ₱50',
+        //     aiAdditionalInfo: 'Eco-friendly approach using biodegradable products',
+        // };
+        // const data = JSON.stringify(dummyData);
+        // navigate('/feasibility', { state: { userData: data } }); 
+
+        navigate('/home');
     };
 
     const handleCreate = () => {
